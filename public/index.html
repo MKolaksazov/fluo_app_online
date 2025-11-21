@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+    <title></title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel='stylesheet' href="https://bootswatch.com/4/yeti/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+          <link rel="stylesheet" href="glass.css">
+            <link rel="stylesheet" href="dropdown.css">
+        <link
+            rel="stylesheet"
+            href="https://pyscript.net/snapshots/2024.9.2/core.css"
+        />
+
+<!--                         <script src="https://unpkg.com/chart.js"></script> -->
+                <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.js"></script>
+                <script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3.6.0/build/index.umd.min.js"></script>  These versions of chart.js doesn't work    -->
+
+   <!--     <script
+            type="module"
+            src="https://pyscript.net/snapshots/2024.9.2/core.js"
+        ></script>-->
+              <style>
+              </style>
+
+            </head>
+
+            <body class="d-flex flex-column min-vh-100">   <script>0</script>
+            <div class="containera mt-5">
+              <!--form -->
+              <div style="top: 0px; left: 5%; position: fixed; background: white; z-index: 7;" >
+              <h1>App for extracting fluorescent experimental data</h1>
+              <div class="contaner" >
+                <div class="input-group-mb-3">
+                  <span class="input-group-text" id="basic-addon1">delimiter: </span>
+                  <input class="form-control" type="text" id="delimiter" name="delimiter" value="tab" required>
+                  </div>
+
+                  <div class="input-group-mb-3"><span class="input-group-text" id="basic-addon1">protocol: </span>
+                    <select id="protocol" name="protocol" class="form-control" >
+                      <option selected="selected">OJIP</option>
+                      <option>NPQ1</option>
+                      <option>NPQ2</option>
+                      <option>NPQ3</option>
+                    </select>
+                  </div>
+
+                  <div class="btn-group" >
+                    <!--button class="btn btn-secondary btn-lg" type="button"> Draw </button-->
+                    <button type="button" class="btn input-group-text aqua" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="">file
+
+                      <div class="down-arrow" ></div>
+                    </button>
+
+                    <div class="btn form-control aqua" style="border-radius: 1px 5px 5px 1px; ">
+                      <!--div class="glare"></div-->
+                      <div class="text-dark" id="makeGr"> draw transient
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07"/>
+                          </svg></div>
+                    </div>
+
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-content">
+                      <div class="dropdown-contenta">
+                        <div class="input-group-mb-3 menu" >
+                          <div  class="btn form-control form-control-hidden">
+                            <li><div id="info" >select file</div></li>
+                            <li><!--</br>-->
+                              <div class="buttons-container " ><!--div class="glare"></div-->
+                                <label for="fileinput" class="btn input-group-text aqua" >  upload from disk </label>
+                                <!--label id="loadData" class="btn input-group-text aqua"> upload from database</label-->
+				<input id="fileinput" type="file"/>
+                              </div>
+                            </li><!--</br>-->
+
+                            <li><!--</br>-->
+                              <div class="buttons-container " ><!--div class="glare"></div-->
+                                <!--label for="fileinput" class="btn input-group-text aqua" >  upload from disk </label-->
+                                <label id="loadData" class="btn input-group-text aqua"> upload from database</label>
+				<!--input id="fileinput" type="file"/-->
+                              </div>
+                            </li>
+
+                            <li>
+                            </br>save selected as the file: <input class=" " type="text" id="export" name="label" value="export" required>.csv
+                             </br></br> please, enter the password: <input class=" " type="text" id="pwd" name="label" value="" required="">
+                            </li>
+
+			<li>
+                              <div class="buttons-container " >
+                                <button id="fileinput_s" class="btn input-group-text aqua"  onclick="downloadBlob();">  save to disk </button>
+                              </div>
+			</li>
+
+                            <li><!--</br>-->
+                              <div class="buttons-container " ><!--div class="glare"></div-->
+                                <!--label for="fileinput" class="btn input-group-text aqua" >  upload from disk </label-->
+                                <label id="uploadCsv" class="btn input-group-text aqua"> save to database</label>
+				<!--input id="fileinput" type="file"/-->
+                              </div>
+                            </li>
+
+                          </div>
+                        </div>
+                      </div>
+                    </ul>
+                  </div>
+
+                  <div class="btn-group" >
+
+                    <div btn class="input-group-text aqua" >parameter: </div>
+
+                      <select id="parameters" name="param" class="btn input-group-text aqua" >
+                        <option disable>select protocol</option>
+                      </select>
+
+                    <div class="btn input-group-text center-btn aqua" style="">
+                      <span class="text-dark" id="drawParams">
+                        draw bars
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line" viewBox="0 0 16 16">
+                          <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1zm1 12h2V2h-2zm-3 0V7H7v7zm-5 0v-3H2v3z"/>
+                          </svg> / linear </span>
+                    </div>
+
+                    <button type="button" class="btn form-control aqua" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius: 1px 5px 5px 1px; ">draw boxplot
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-center" viewBox="0 0 16 16">
+  <path d="M8 1a.5.5 0 0 1 .5.5V6h-1V1.5A.5.5 0 0 1 8 1m0 14a.5.5 0 0 1-.5-.5V10h1v4.5a.5.5 0 0 1-.5.5M2 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+</svg>
+                      <div class="down-arrow" ></div>
+                    </button>
+
+                     <ul class="dropdown-menu dropdown-menu-end dropdown-content" style="width: max-content;  ">
+                      <div class="dropdown-contenta">
+                        <div class="input-group-mb-3 menu" >
+                          <div  class="form-control form-control-hidden">
+                            <li><div id="info" >select the columns (every repetition of a variant) to be included in the graph in their order, enter the amount of groups you have and hit the 'draw' button </div></li>
+
+                            <li>
+                            </br>set number of colored groups: <input class=" " type="text" id="colorsInput" name="label" value="1" required>
+                             <!--</br>--><!--</br>--> <!--please, enter the password: <input class=" " type="text" id="pwd" name="label" value="" required="">-->
+                              <span class="buttons-container " >
+                                <button id="drawBoxPlot" class="input-group-text aqua" >  draw </button>
+                              </span>
+                            </li>
+
+                          </div>
+                        </div>
+                      </div>
+                    </ul>
+
+                  </div>
+
+                  <div class="btn-group">
+                    <button class="btn text-dark form-control aqua" type="button"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" border-radius: 5px 5px 5px 5px; ">
+                      rename & average
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-steps" viewBox="0 0 16 16">
+                        <path d="M.5 0a.5.5 0 0 1 .5.5v15a.5.5 0 0 1-1 0V.5A.5.5 0 0 1 .5 0M2 1.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-6a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5z"/><i class="bi bi-bar-chart-steps"></i>
+                      </svg>
+                      <div class="down-arrow" ></div>
+
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-content">
+                      <div class="dropdown-contenta">
+                        <div class="input-group-mb-3 menu" >
+                          <div  class="form-control form-control-hidden">
+                            <div id="info" >rename labels of selected experimental samples with:</div>
+                            <input class=" " type="text" id="label" name="label" value="T. aestivum" required> and calculate their average
+                              <div class="buttons-container" >
+                                <button class="input-group-text aqua" id="makeAvg" > average </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ul>
+                    </div>
+
+                  <div class="btn-group" >
+                      <button class="btn text-dark form-control aqua" style="height: 101%; border-radius: 5px 5px 5px 5px; " type="button" onclick="selectAll();">
+                      select All / None
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
+                          <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                          <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+                        </svg>
+                      </button>
+                  </div>
+
+                  <div class="btn-group" >
+                    <a href="documentation.html" target="_self" >
+                      <button class="btn text-dark form-control aqua" style="height: 101%; border-radius: 5px 5px 5px 5px; " type="button" href="./documentation.html">
+                      documentation & help
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                          <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+                        </svg>
+                      </button>
+                    </a>
+                  </div>
+			              <!--button id="loadData">Saved CSV files</button-->
+                  </div>
+</div >
+
+                  <div id="canvasContainer" ></div>
+                  <div id="tbl" ></div>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+              <footer class="mt-auto" id="f-text" style="text-align: center; background: #eee;"></hr>
+              <p> To make use of the downloaded CSV files you should first have the encryption file, which can be found <a id="href" href="targetUrl">here</a> </p>
+                <p>M. Kolaksazov, PhD; 2024 <a href="mailto:hege@example.com">m.kolaksazov@gmail.com</a></p>
+              </footer>
+
+<!--                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
+                <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.js"></script>       <!--jstat.js is the normal version; jstat.min.js is the minimal version-->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+                <script src="https://cdn.jsdelivr.net/npm/@sgratzl/chartjs-chart-boxplot"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="main.js"></script>
+                <script src="processing.js"></script>
+                <script src="encryption.js"></script>
+                <script src="table.js"></script>
+                <script src="graph.js"></script>
+                <script src="graph_params.js"></script>
+                <script src="graph_boxplot.js"></script>
+
+
+
+              </body>
+            </html>
+
