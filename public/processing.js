@@ -52,6 +52,9 @@ document.getElementById('loadData').addEventListener('click', async () => {
   const res = await fetch('/api/data/');
   const data = await res.json();
   const tbl = document.getElementById('tbl');
+  const t1 = document.getElementById('table-1');
+  if (t1 != null) { t1.remove(); }
+
   var table = document.createElement('table');
   table.classList.add("table", "table-striped");
   tbl.appendChild(table);

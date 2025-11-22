@@ -45,14 +45,11 @@ router.post('/upload-csv', async (req, res) => {
         const jsonString = JSON.stringify(jsonResults);
         
         // *Примерна* логика за DB запис
-        const [result] = await db.query('INSERT INTO data_storage (json_data, filename, created_at) VALUES ($1, $2, NOW())', 
+        const result = await db.query('INSERT INTO data_storage (json_data, filename, created_at) VALUES ($1, $2, NOW())', 
             [jsonString, fileName]);
         
-        const dummyResult = { insertId: 101 };
-
         res.json({ 
             status: 'ok', 
-            //id: dummyResult.insertId, 
             rows: jsonResults.length 
         });
 
