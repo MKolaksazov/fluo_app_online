@@ -45,7 +45,7 @@ router.post('/upload-csv', async (req, res) => {
         const jsonString = JSON.stringify(jsonResults);
         
         // *Примерна* логика за DB запис
-        const [result] = await db.query('INSERT INTO data_storage (json_data, filename, created_at) VALUES (?, ?, NOW())', 
+        const [result] = await db.query('INSERT INTO data_storage (json_data, filename, created_at) VALUES ($1, $2, NOW())', 
             [jsonString, fileName]);
         
         const dummyResult = { insertId: 101 };
@@ -68,7 +68,7 @@ router.delete('/data/:id/csv', async (req, res) => {
         const recordId = req.params.id; // Взимаме ID-то от URL-а
 
         // ⭐ SQL Заявка за изтриване
-        await db.query('DELETE FROM data_storage WHERE id = ?', [recordId]);
+        await db.query('DELETE FROM data_storage WHERE id = $1', [recordId]);
 
         // Пример:
         const affectedRows = 1; 

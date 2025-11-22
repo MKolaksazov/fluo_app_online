@@ -3,21 +3,21 @@ const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
 const csv = require('csv-parser');
-const msql = require('./db');
-const mysql = require('mysql2');
+const db = require('./db');
+//const mysql = require('mysql2');
 
 const app = express();
 const PORT = process.env.PORT || 3030;
 app.use(express.static('public'));
 app.use(express.json());
-
+/*
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'appuser',
   password: 'StrongPassword123!',
   database: 'csv_tool_db'
 });
-
+*/
 //const uploadRoutes = require('./routes/upload');
 //app.use('/api', uploadRoutes);
 
@@ -82,6 +82,10 @@ res.json({ status: 'Сървърът работи успешно ✅', time: new
 
 
 app.get('/api/data', (req, res) => {
+//  const result = await pool.query("SELECT * FROM data_storage");
+//  return result.rows;
+
+
   db.query('SELECT * FROM data_storage', (err, results) => {
     if (err) {
       res.status(500).json({ error: 'Database query failed' });
