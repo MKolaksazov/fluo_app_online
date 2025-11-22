@@ -74,7 +74,7 @@
 - **База данни:** MySQL или PostgreSQL - настояща (pool connections, async/await)  
 - **CSV обработка:** csv-parser, json2csv  
 - **Деплой:** Render.com
-- **Документация** GPT5
+- **Документация:** GPT5
 
 ---
 
