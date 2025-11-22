@@ -80,11 +80,10 @@ app.get('/api/status', (req, res) => {
 res.json({ status: 'Сървърът работи успешно ✅', time: new Date().toLocaleString() });
 });
 
-
+/*
 app.get('/api/data', (req, res) => {
 //  const result = await pool.query("SELECT * FROM data_storage");
 //  return result.rows;
-
 
   db.query('SELECT * FROM data_storage', (err, results) => {
     if (err) {
@@ -94,7 +93,16 @@ app.get('/api/data', (req, res) => {
     }
   });
 });
+*/
 
+app.get('/api/data', async (req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM data_storage');
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Database query failed' });
+  }
+});
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
