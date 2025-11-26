@@ -122,8 +122,13 @@
             
             inputText.addEventListener("change", () => {
               var colIndex = inputText.parentNode.cellIndex;
-              tableData[colIndex][0] = inputText.value;
-              //console.log(colIndex, text, inputText.value);
+
+              colsSelected.forEach(i => {
+                tableData[i][0] = inputText.value;
+                document.getElementById('table-1').childNodes[0].childNodes[0].childNodes[i].childNodes[7].value = inputText.value;
+                //inputText.setAttribute("value", inputText.value);
+                //console.log(colIndex, tableData[i][0], inputText.value);
+              });
             });
           }
           else {
