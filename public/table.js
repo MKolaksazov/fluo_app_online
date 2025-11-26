@@ -17,7 +17,21 @@
 
             if (rowData[0] == 'index') makeCheckbox(cellData, cell, table);
             else cell.appendChild(document.createTextNode(cellData));
+
             row.appendChild(cell);
+
+            if (cell.cellIndex != 0 && rowData[0] == 'index') {
+              cell.addEventListener("click", () => {
+                checkbox = cell.childNodes[1];
+                columnIndex = checkbox.parentNode.cellIndex;
+
+                if (colsSelected.includes(columnIndex))
+                { colsSelected = colsSelected.filter(e => e != columnIndex); checkbox.checked = false; } // remove element if in array
+                else { colsSelected.push(columnIndex); checkbox.checked = true; }
+                  toggleColumnHighlight(columnIndex, checkbox.checked, table);
+              });
+            }
+
           });
           tableBody.appendChild(row);
         });
@@ -75,7 +89,19 @@
             }});
         }
       }
+/*
+      function selectCell(cell){
+            cell.addEventListener("click", () => {
+            //checkbox.addEventListener("change", () => {
+              columnIndex = checkbox.parentNode.cellIndex;
 
+              if (colsSelected.includes(columnIndex))
+              { colsSelected = colsSelected.filter(e => e != columnIndex); } // remove element if in array
+              else { colsSelected.push(columnIndex); }
+                toggleColumnHighlight(columnIndex, checkbox.checked, table);
+            });
+      }
+*/
       function makeCheckbox(text, cell, table) {
           if (text != 'index') {
             var checkbox = document.createElement("input");
@@ -105,15 +131,7 @@
               if (colsSelected.includes(columnIndex))
               { colsSelected = colsSelected.filter(e => e != columnIndex); } // remove element if in array
               else { colsSelected.push(columnIndex); }
-              // Check if the column contains only numbers
-              //const isNumberColumn = Array.from(table.rows).slice(slicePoints[0],slicePoints[1])
-              //  .every(row => !isNaN(row.cells[columnIndex].textContent));
-              //if (isNumberColumn) {
                 toggleColumnHighlight(columnIndex, checkbox.checked, table);
-              //} else {
-              //  alert("This column doesn't contain only numbers.");
-              //checkbox.checked = false;
-              //}
             });
 
             colorPick.addEventListener("change", () => {
