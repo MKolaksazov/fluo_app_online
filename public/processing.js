@@ -31,9 +31,10 @@ document.getElementById("uploadCsv").addEventListener("click", async () => {
             // Изпращаме генерично име и въведения CSV текст
             body: JSON.stringify({ csvName: fileName, csvText: csvText }) 
         });
+console.log(response, fileName, csvText);
 
         const result = await response.json();
-console.log(result, response, fileName, csvText);
+
         if (response.ok && result.status === "ok") {
             alert(`Данните са изпратени успешно! ID: ${result.id}, редове: ${result.rows}`);
         } else {
