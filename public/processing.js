@@ -33,7 +33,7 @@ document.getElementById("uploadCsv").addEventListener("click", async () => {
         });
 
         const result = await response.json();
-
+console.log(result, response, fileName, csvText);
         if (response.ok && result.status === "ok") {
             alert(`Данните са изпратени успешно! ID: ${result.id}, редове: ${result.rows}`);
         } else {

@@ -61,7 +61,7 @@ router.post('/upload-csv', async (req, res) => {
 });
 
 // DELETE by ID
-router.delete('/:id', async (req, res) => {
+router.delete('/:id/csv', async (req, res) => {
   try {
     await deleteData(req.params.id);
     res.json({ status: 'ok' });
