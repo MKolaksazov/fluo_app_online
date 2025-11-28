@@ -36,14 +36,21 @@ router.get('/:id/csv', async (req, res) => {
 
 // POST upload CSV
 router.post('/upload-csv', async (req, res) => {
-  const csvText = req.body.csvText;
+  const rows = req.body.csvText;
   const fileName = req.body.csvName || 'uploaded_data.csv';
 
-  if (!csvText) return res.status(400).json({ status: 'error', message: 'CSV text is missing' });
+  //if (!csvText) return res.status(400).json({ status: 'error', message: 'CSV text is missing' });
+
+  if (!Array.isArray(rows)) {
+    return res.status(400).json({ error: "Invalid format" });
+  }
+
+  // Тук правим batch insert (примерно на 500 реда)
+  //await insertInBatches(rows);
 
   const jsonResults = [];
-  const stream = Readable.from(csvText);
-
+//const stream = Readable.from(csvText);
+/*
   try {
     await new Promise((resolve, reject) => {
       stream.pipe(csv({ separator: '\t', quote: '' }))
@@ -51,9 +58,9 @@ router.post('/upload-csv', async (req, res) => {
         .on('end', resolve)
         .on('error', reject);
     });
-
-    const inserted = await insertData(jsonResults, fileName);
-    res.json({ status: 'ok', id: inserted.id, rows: jsonResults.length });
+*/
+    const inserted = await insertData(rows, fileName);
+    res.json({ status: 'ok', id: inserted.id, rows: rows.length });
   } catch (err) {
     console.error('CSV parsing/DB error:', err);
     res.status(500).json({ status: 'error', message: 'Error processing data.' });

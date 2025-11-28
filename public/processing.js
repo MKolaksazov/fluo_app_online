@@ -11,11 +11,11 @@ document.getElementById("uploadCsv").addEventListener("click", async () => {
       content.unshift([ " " ]);
     }
 
-    const csvText = arrayToCsv(content); //document.getElementById("csvTextArea");
+    //const csvText = arrayToCsv(content); //document.getElementById("csvTextArea");
     //const csvText = csvTextArea.trim(); // Взимане на стойността и премахване на излишни интервали
     // не ми е нужно, тъй като моят csv формат съдържа нарочно празни места
 
-    if (!csvText) {
+    if (!content) {
         alert("Моля, въведете CSV текст!");
         return;
     }
@@ -29,7 +29,7 @@ document.getElementById("uploadCsv").addEventListener("click", async () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             // Изпращаме генерично име и въведения CSV текст
-            body: JSON.stringify({ csvName: fileName, csvText: csvText }) 
+            body: JSON.stringify({ csvName: fileName, csvText: content }) 
         });
 //console.log(response, response.body, response.method);
 
