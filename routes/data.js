@@ -49,7 +49,7 @@ router.post('/upload-csv', async (req, res) => {
 
         // 1) Първият ред е header
         const header = rows[0];
-        const dataRows = rows.slice(1);
+        const dataRows = rows //.slice(1);
 
         // 2) Подготовка за batch INSERT
         const batchSize = 200;    // 200 реда за заявка – безопасно
@@ -77,9 +77,7 @@ router.post('/upload-csv', async (req, res) => {
             });
 
             // filename e $1, json_data e $2...$N
-            const sql = `
-                INSERT INTO data_storage (filename, json_data)
-                VALUES ${values.join(",")}`;
+            const sql = `INSERT INTO data_storage (filename, json_data) VALUES ${values.join(",")}`;
 
             await db.query(sql, [filename, ...params]);
             inserted += chunk.length;
@@ -104,7 +102,7 @@ router.post('/upload-csv', async (req, res) => {
     });
 */
     //const inserted = await insertData(rows, fileName);
-    res.json({ status: 'ok', id: inserted, rows: rows.length });
+    res.json({ status: 'ok', rows: rows.length });
   } catch (err) {
     console.error('CSV parsing/DB error:', err);
     res.status(500).json({ status: 'error', message: 'Error processing data.' });
