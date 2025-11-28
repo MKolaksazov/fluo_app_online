@@ -25,7 +25,7 @@ document.getElementById("uploadCsv").addEventListener("click", async () => {
 
     try {
         // ⭐ 3. Изпращане на заявката с директния CSV стринг
-        const response = await fetch("/api/data/upload-csv", {
+        const response = await fetch("/upload-csv", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             // Изпращаме генерично име и въведения CSV текст
