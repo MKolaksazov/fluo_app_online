@@ -48,10 +48,11 @@ router.post('/upload-csv', async (req, res) => {
   // Тук правим batch insert (примерно на 500 реда)
   //await insertInBatches(rows);
 
-  const jsonResults = [];
+//  const jsonResults = [];
 //const stream = Readable.from(csvText);
-/*
+
   try {
+/*
     await new Promise((resolve, reject) => {
       stream.pipe(csv({ separator: '\t', quote: '' }))
         .on('data', (data) => jsonResults.push(data))
