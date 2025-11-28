@@ -72,8 +72,9 @@ async function loadFile(id_db){
     const res = await fetch('/api/data/'+id_db+'/csv');
     const data = await res.text();
     const table = document.getElementById('tbl');
-  
-    processCSV(data.replace(/"/g, ''));
+
+    //var delimiter = document.getElementById('delimiter').value;
+    processCSV(data.replace(/"/g, ''), 'tab');
   //});
 }
 
@@ -125,8 +126,7 @@ async function deleteFile(id_db) {
 //     deleteRecord(recordIdToDelete);
 // });
 
-function processCSV(contents){
-          var delimiter = document.getElementById('delimiter').value;
+function processCSV(contents, delimiter){
           var lines = contents.split("\n");
           var array = [];
           for (var i=0; i<lines.length; i++){

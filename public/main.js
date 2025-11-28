@@ -92,7 +92,9 @@ document.getElementById('parameters').onchange = function() {
           r.onload = function(e) {
               var contents = e.target.result;
               info.innerHTML = ("File <mark>" + f.name + "</mark> uploaded! " + " <b>" + f.type + "</b> " + " " + f.size/1000 + " kB");
-              processCSV(contents);
+
+              var delimiter = document.getElementById('delimiter').value;
+              processCSV(contents, delimiter);
          }
           r.readAsText(f);
         } else {
