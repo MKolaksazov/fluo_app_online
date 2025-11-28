@@ -22,7 +22,7 @@ document.getElementById("uploadCsv").addEventListener("click", async () => {
     
     // ⭐ 2. Името на файла вече не е налично, затова използваме генерично име или го питаме
     const fileName = (filename != "export.csv") ? filename : "manual_upload_" + new Date().toISOString() + ".csv"; 
-
+console.log(content);
     try {
         // ⭐ 3. Изпращане на заявката с директния CSV стринг
         const response = await fetch("/api/data/upload-csv", {
