@@ -31,7 +31,7 @@ document.getElementById("uploadCsv").addEventListener("click", async () => {
             // Изпращаме генерично име и въведения CSV текст
             body: JSON.stringify({ csvName: fileName, csvText: csvText }) 
         });
-console.log(response, response.body, response.method);
+//console.log(response, response.body, response.method);
 
         const result = await response.json();
 
