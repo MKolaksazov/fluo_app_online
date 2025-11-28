@@ -104,7 +104,7 @@ router.post('/upload-csv', async (req, res) => {
     });
 */
     //const inserted = await insertData(rows, fileName);
-    res.json({ status: 'ok', rows: rows.length });
+    res.json({ status: 'ok', id: inserted, rows: rows.length });
   } catch (err) {
     console.error('CSV parsing/DB error:', err);
     res.status(500).json({ status: 'error', message: 'Error processing data.' });
