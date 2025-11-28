@@ -37,7 +37,7 @@ router.get('/:id/csv', async (req, res) => {
 // POST upload CSV
 router.post('/upload-csv', async (req, res) => {
   const rows = req.body.csvText;
-  const fileName = req.body.csvName || 'uploaded_data.csv';
+  const filename = req.body.csvName || 'uploaded_data.csv';
 
   //if (!csvText) return res.status(400).json({ status: 'error', message: 'CSV text is missing' });
 
@@ -46,13 +46,56 @@ router.post('/upload-csv', async (req, res) => {
   }
 
   // Тук правим batch insert (примерно на 500 реда)
+
+        // 1) Първият ред е header
+        const header = rows[0];
+        const dataRows = rows.slice(1);
+
+        // 2) Подготовка за batch INSERT
+        const batchSize = 200;    // 200 реда за заявка – безопасно
+        let inserted = 0;
+
+        for (let i = 0; i < dataRows.length; i += batchSize) {
+            const chunk = dataRows.slice(i, i + batchSize);
+
+            // превръщаме chunk в многоредов INSERT
+            // таблица: data_storage (filename, json_data)
+            // json_data = JSON обект за всеки ред
+            const values = [];
+            const params = [];
+
+            chunk.forEach((row, idx) => {
+                const obj = {};
+
+                // мапваме всяка клетка към ключ от header
+                header.forEach((key, colIndex) => {
+                    obj[key] = row[colIndex] ?? null;
+                });
+
+                params.push(JSON.stringify(obj));
+                values.push(`($1, $${params.length + 1})`);
+            });
+
+            // filename e $1, json_data e $2...$N
+            const sql = `
+                INSERT INTO data_storage (filename, json_data)
+                VALUES ${values.join(",")}`;
+
+            await db.query(sql, [filename, ...params]);
+            inserted += chunk.length;
+        }
+
+
+
+/*
+
   //await insertInBatches(rows);
 
 //  const jsonResults = [];
 //const stream = Readable.from(csvText);
 
   try {
-/*
+
     await new Promise((resolve, reject) => {
       stream.pipe(csv({ separator: '\t', quote: '' }))
         .on('data', (data) => jsonResults.push(data))
@@ -60,8 +103,8 @@ router.post('/upload-csv', async (req, res) => {
         .on('error', reject);
     });
 */
-    const inserted = await insertData(rows, fileName);
-    res.json({ status: 'ok', id: inserted.id, rows: rows.length });
+    //const inserted = await insertData(rows, fileName);
+    res.json({ status: 'ok', id: inserted, rows: rows.length });
   } catch (err) {
     console.error('CSV parsing/DB error:', err);
     res.status(500).json({ status: 'error', message: 'Error processing data.' });
