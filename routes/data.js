@@ -36,6 +36,8 @@ router.get('/:id/csv', async (req, res) => {
 
 // POST upload CSV
 router.post('/upload-csv', async (req, res) => {
+  try {
+
   const rows = req.body.csvText;
   const filename = req.body.csvName || 'uploaded_data.csv';
 
