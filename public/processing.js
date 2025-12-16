@@ -5,7 +5,7 @@ document.getElementById("uploadCsv").addEventListener("click", async () => {
     filename=`${fname}.csv`;
 
     if (colsSelected.length > 0) { content = insertSelected(colsSelected); }
-    content = transpose(content);
+    //content = transpose(content);
 
     var times = 5; while(times--) {
       content.unshift([ " " ]);
