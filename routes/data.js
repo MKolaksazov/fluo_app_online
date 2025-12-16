@@ -52,7 +52,7 @@ router.post('/upload-csv', async (req, res) => {
         // 1) Първият ред е header
         const header = rows[0];
         const dataRows = rows //.slice(1);
-
+console.log(header, "/n d", dataRows);
         // 2) Подготовка за batch INSERT
         const batchSize = 10;    // 200 реда за заявка – безопасно
         let inserted = 0;
@@ -77,7 +77,7 @@ router.post('/upload-csv', async (req, res) => {
                 params.push(JSON.stringify(obj));
                 values.push(`($1, $${params.length + 1})`);
             });
-
+console.log(values, "/n p", params);
             // filename e $1, json_data e $2...$N
             const sql = `INSERT INTO data_storage (filename, json_data) VALUES ${values.join(",")}`;
 
