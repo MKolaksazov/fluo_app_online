@@ -31,7 +31,7 @@ console.log(content);
             // Изпращаме генерично име и въведения CSV текст
             body: JSON.stringify({ csvName: fileName, csvText: content }) 
         });
-console.log(response, response.body, response.method);
+console.log(response, "b", response.body, "m", response.method);
 
         const result = await response.json();
 
