@@ -54,7 +54,7 @@ router.post('/upload-csv', async (req, res) => {
         const dataRows = rows //.slice(1);
 
         // 2) Подготовка за batch INSERT
-        const batchSize = 200;    // 200 реда за заявка – безопасно
+        const batchSize = 50;    // 200 реда за заявка – безопасно
         let inserted = 0;
 
         for (let i = 0; i < dataRows.length; i += batchSize) {

@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3030;
 
 app.use(express.static('public'));
-app.use(express.json());
+app.use(express.json({ limit: '5mb' }));
 
 // Главни API маршрути
 const dataRoutes = require('./routes/data');
