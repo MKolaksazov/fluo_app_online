@@ -5,11 +5,13 @@ document.getElementById("uploadCsv").addEventListener("click", async () => {
     filename=`${fname}.csv`;
 
     if (colsSelected.length > 0) { content = insertSelected(colsSelected); }
-    //content = transpose(content);
+    content = transpose(content);
 
     var times = 5; while(times--) {
       content.unshift([ " " ]);
     }
+
+    content = transpose(content);
 
     //const csvText = arrayToCsv(content); //document.getElementById("csvTextArea");
     //const csvText = csvTextArea.trim(); // Взимане на стойността и премахване на излишни интервали
