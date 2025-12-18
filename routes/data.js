@@ -50,15 +50,15 @@ router.post('/upload-csv', async (req, res) => {
   // Тук правим batch insert (примерно на 500 реда)
 
         // 1) Първият ред е header
-        const header = rows[0];
-        const dataRows = rows //.slice(1);
-console.log(header, "/n d", dataRows);
+//        const header = rows[0];
+//        const dataRows = rows //.slice(1);
+console.log("rows: ", rows);
         // 2) Подготовка за batch INSERT
-        const batchSize = 10;    // 200 реда за заявка – безопасно
+        //const batchSize = 10;    // 200 реда за заявка – безопасно
         let inserted = 0;
 
-        for (let i = 0; i < dataRows.length; i += batchSize) {
-            const chunk = dataRows.slice(i, i + batchSize);
+        for (let i = 0; i < rows.length; i += 1) {
+/*            const chunk = rows[i] //.slice(i, i + batchSize);
 
             // превръщаме chunk в многоредов INSERT
             // таблица: data_storage (filename, json_data)
@@ -77,12 +77,13 @@ console.log(header, "/n d", dataRows);
                 params.push(JSON.stringify(obj));
                 values.push(`($1, $${params.length + 1})`);
             });
-console.log(values, "/n p", params);
+*/
+console.log("/n p", rows[i]);
             // filename e $1, json_data e $2...$N
-            const sql = `INSERT INTO data_storage (filename, json_data) VALUES ${values.join(",")}`;
+            const sql = `INSERT INTO data_storage (filename, json_data) VALUES ($1, $2)`;
 
-            await db.query(sql, [filename, ...params]);
-            inserted += chunk.length;
+            await db.query(sql, [filename, JSON.stringify(rows[i])]);
+            //inserted += chunk.length;
         }
 
 
