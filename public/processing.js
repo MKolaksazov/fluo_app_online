@@ -3,28 +3,12 @@ document.getElementById("uploadCsv").addEventListener("click", async () => {
     var content = tableData;
     var fname = document.getElementById('export').value;
     filename=`${fname}.csv`;
-
     if (colsSelected.length > 0) { content = insertSelected(colsSelected); }
-//    content = transpose(content);
+    if (!content) { alert("Моля, въведете CSV текст!"); return; }
 
-//    var times = 5; while(times--) {
-//      content.unshift([ " " ]);
-//    }
-
-//    content = transpose(content);
-
-    //const csvText = arrayToCsv(content); //document.getElementById("csvTextArea");
-    //const csvText = csvTextArea.trim(); // Взимане на стойността и премахване на излишни интервали
-    // не ми е нужно, тъй като моят csv формат съдържа нарочно празни места
-
-    if (!content) {
-        alert("Моля, въведете CSV текст!");
-        return;
-    }
-    
     // ⭐ 2. Името на файла вече не е налично, затова използваме генерично име или го питаме
     const fileName = (filename != "export.csv") ? filename : "manual_upload_" + new Date().toISOString() + ".csv"; 
-console.log(content);
+
     try {
         // ⭐ 3. Изпращане на заявката с директния CSV стринг
         const response = await fetch("/api/data/upload-csv", {
@@ -33,7 +17,6 @@ console.log(content);
             // Изпращаме генерично име и въведения CSV текст
             body: JSON.stringify({ csvName: fileName, csvText: content }) 
         });
-console.log(response, "b", response.body, "m", response.method);
 
         const result = await response.json();
 

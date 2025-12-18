@@ -2,13 +2,22 @@
 const db = require('../db');
 
 async function getAllData() {
-  const result = await db.query('SELECT * FROM data_storage ORDER BY id ASC');
+//  const result = await db.query('SELECT * FROM data_storage ORDER BY id ASC');
+  const result = await db.query('SELECT DISTINCT ON (filename) id, filename, created_at FROM data_storage ORDER BY filename, created_at ASC;');
   return result.rows;
 }
 
 async function getDataById(id) {
-  const result = await db.query('SELECT json_data FROM data_storage WHERE id = $1', [id]);
-  return result.rows[0];
+//  const result = await db.query('SELECT json_data FROM data_storage WHERE id = $1', [id]);
+  const res = await db.query('SELECT filename FROM data_storage WHERE id = $1;', [id]);
+  const result = await db.query('SELECT json_data FROM data_storage WHERE filename = $1 ORDER BY created_at ASC;', [res.rows[0].filename]);
+
+  const allRows = [];
+  result.rows.forEach(r => {
+      const parsed = JSON.parse(r.json_data); // едномерен масив на ред
+      allRows.push(parsed); // добавяме като отделен ред
+  });
+  return allRows; // вече е двумерен масив
 }
 
 async function insertData(jsonData, filename) {
@@ -24,4 +33,3 @@ async function deleteData(id) {
 }
 
 module.exports = { getAllData, getDataById, insertData, deleteData };
-

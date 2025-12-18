@@ -5,6 +5,8 @@ const { Parser } = require('json2csv');
 const csv = require('csv-parser');
 const { Readable } = require('stream');
 
+function transpose(arrayData) { return arrayData[0].map((_, colIndex) => arrayData.map(row => row[colIndex])); }
+
 // GET all data
 router.get('/', async (req, res) => {
   try {
@@ -21,11 +23,10 @@ router.get('/:id/csv', async (req, res) => {
   try {
     const row = await getDataById(req.params.id);
     if (!row) return res.status(404).send('Record not found');
-
-    const jsonData = JSON.parse(row.json_data);
-    const parser = new Parser({ delimiter: '\t' });
-    const csvData = parser.parse(jsonData);
-
+    const jsonDataTransposed = transpose(row);
+    var times = 5; while(times--) { jsonDataTransposed.unshift([ " " ]); }
+    const parser = new Parser({ header: false, delimiter: '\t' });
+    const csvData = parser.parse(jsonDataTransposed);
     res.header('Content-Type', 'text/plain; charset=utf-8');
     res.send(csvData);
   } catch (err) {
@@ -47,65 +48,12 @@ router.post('/upload-csv', async (req, res) => {
     return res.status(400).json({ error: "Invalid format" });
   }
 
-  // Тук правим batch insert (примерно на 500 реда)
+  for (let i = 0; i < rows.length; i += 1) {
+    await insertData(rows[i], filename);
+  }
 
-        // 1) Първият ред е header
-//        const header = rows[0];
-//        const dataRows = rows //.slice(1);
-console.log("rows: ", rows);
-        // 2) Подготовка за batch INSERT
-        //const batchSize = 10;    // 200 реда за заявка – безопасно
-        let inserted = 0;
-
-        for (let i = 0; i < rows.length; i += 1) {
-/*            const chunk = rows[i] //.slice(i, i + batchSize);
-
-            // превръщаме chunk в многоредов INSERT
-            // таблица: data_storage (filename, json_data)
-            // json_data = JSON обект за всеки ред
-            const values = [];
-            const params = [];
-
-            chunk.forEach((row, idx) => {
-                const obj = {};
-
-                // мапваме всяка клетка към ключ от header
-                header.forEach((key, colIndex) => {
-                    obj[key] = row[colIndex] ?? null;
-                });
-
-                params.push(JSON.stringify(obj));
-                values.push(`($1, $${params.length + 1})`);
-            });
-*/
-console.log("/n p", rows[i]);
-            // filename e $1, json_data e $2...$N
-            const sql = `INSERT INTO data_storage (filename, json_data) VALUES ($1, $2)`;
-
-            await db.query(sql, [filename, JSON.stringify(rows[i])]);
-            //inserted += chunk.length;
-        }
-
-
-
-/*
-
-  //await insertInBatches(rows);
-
-//  const jsonResults = [];
-//const stream = Readable.from(csvText);
-
-  try {
-
-    await new Promise((resolve, reject) => {
-      stream.pipe(csv({ separator: '\t', quote: '' }))
-        .on('data', (data) => jsonResults.push(data))
-        .on('end', resolve)
-        .on('error', reject);
-    });
-*/
     //const inserted = await insertData(rows, fileName);
-    res.json({ status: 'ok', id: inserted, rows: rows.length });
+    res.json({ status: 'ok', id: filename, rows: rows.length });
   } catch (err) {
     console.error('CSV parsing/DB error:', err);
     res.status(500).json({ status: 'error', message: 'Error processing data.' });
