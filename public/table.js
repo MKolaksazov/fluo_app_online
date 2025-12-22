@@ -49,31 +49,46 @@ function makeSelectAllButton(cell, table) {
     //cell.appendChild(bAll);
 }
 
-// Header с текстово поле и color picker
+// Header с бутон за цвят и текстово поле
 function makeColumnHeader(text, cell, table, colIndex) {
+    // Скрит color input
     const colorPick = document.createElement("input");
     colorPick.setAttribute("type", "color");
-    colorPick.setAttribute("value", "#ffffff");
+    colorPick.style.display = "none"; // скрито поле
 
+    // Бутон за избор на цвят
+    const colorBtn = document.createElement("button");
+    colorBtn.textContent = "pick color";
+    colorBtn.setAttribute("class", "colorBtn");
+    colorBtn.style.marginRight = "5px";
+
+    // Текстово поле за имената на колоните
     const inputText = document.createElement("input");
     inputText.setAttribute("type", "text");
     inputText.setAttribute("class", "sampleLabel");
     inputText.setAttribute("value", text);
 
-    cell.appendChild(document.createTextNode("change color: "));
+    // Добавяне на елементи към клетката
+    //cell.appendChild(document.createTextNode(""));
+    cell.appendChild(colorBtn);
     cell.appendChild(colorPick);
     cell.appendChild(document.createElement("br"));
-    cell.appendChild(document.createTextNode("sample name (change) "));
+    cell.appendChild(document.createTextNode("variant name (change): "));
     cell.appendChild(inputText);
     cell.appendChild(document.createElement("br"));
 
+    // Click върху бутона отваря color picker
+    colorBtn.addEventListener('click', () => colorPick.click());
+
+    // При избор на цвят - оцветяване на бутона и запис в colors
+    colorPick.addEventListener('input', () => {
+        colors[colIndex] = colorPick.value;
+        colorBtn.style.backgroundColor = colorPick.value;
+        colorBtn.textContent = "Color selected!";
+    });
+
     // Click върху клетката за селекция
     cell.addEventListener('click', () => toggleColumn(colIndex, table));
-
-    // Цветови picker
-    colorPick.addEventListener('change', () => {
-        colors[colIndex] = colorPick.value;
-    });
 
     // Batch rename
     inputText.addEventListener('change', () => batchRename(inputText.value, table));

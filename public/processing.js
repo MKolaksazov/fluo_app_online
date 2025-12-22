@@ -47,9 +47,11 @@ document.getElementById('loadData').addEventListener('click', async () => {
 
   const tbody = document.createElement('tbody');
   table.appendChild(tbody);
-  
+
+  data.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+
   tbody.innerHTML = `</br><tr><th>name</th><th>date</th><th></th><th></th></tr>`;
-  data.forEach(row => { tbody.innerHTML += `<tr id="r${row.id}" > <td>${row.filename || '(undefined)'}</td> <td>${row.created_at}</td> <td><button id="loadFile" onClick="loadFile('${row.id}')">Load file</button></td><td><button id="deleteFile" onClick="deleteFile('${row.id}')">Delete file</button></td> </tr>`; });
+  data.forEach(row => { tbody.innerHTML += `<tr id="r${row.id}" > <td>${row.filename || '(undefined)'}</td> <td>${row.created_at}</td> <td><button id="loadFile" class="btn text-dark aqua" onClick="loadFile('${row.id}')">Load file</button></td><td><button id="deleteFile" class="btn text-dark form-control aqua" onClick="deleteFile('${row.id}')">Delete file</button></td> </tr>`; });
 });
 
 async function loadFile(id_db){ 
