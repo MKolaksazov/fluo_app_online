@@ -1,75 +1,74 @@
 # Fluo App Online
 
 **Authors:** M. Kolaksazov, PhD; ChatGPT
-**Year:** 2024  
+**Year:** 2024
 **License:** Free to use and copy
 
-**Online:** [fluo-app-online](https://fluo-app-online.onrender.com/)  
+**Online:** [fluo-app-online](https://fluo-app-online.onrender.com/)
 **Previous demo link:** [GitHub Pages](https://mkolaksazov.github.io/Telerik-Academy/JavaScript/csv_tool/public/index.html)
 
 ---
 
 ## Description
-Fluo App Online is a web application for extracting, processing, and analyzing experimental fluorescent data.  
-The application works with CSV or TXT files and allows:
 
-- Selecting columns and rows of data
-- Selecting protocols for the FluorPen 110 (PSI, Czech Republic) fluorometer: OJIP, NPQ1, NPQ2, NPQ3
-- Plotting transient OJIP and NPQ curves
-- Calculating averages of selected columns and assigning new sample names
-- Calculating OJIP and NPQ parameters and plotting corresponding graphs
-- Saving processed columns as CSV files
-- Graphs implemented using Chart.js
+Fluo App Online is a web application designed for extracting, processing, and analyzing experimental fluorescent data, compatible with CSV and TXT files. It allows users to select data columns and rows, apply experimental protocols for the FluorPen 110 (PSI, Czech Republic), plot transient OJIP and NPQ curves, compute averages, calculate OJIP and NPQ parameters, and export processed data.
 
 ---
 
 ## Main Features
 
-1. **File Upload**  
-   - Supports CSV, TXT, TSV files.  
-   - Automatically detects column separators (tab, comma, semicolon) and decimal delimiter.  
-   - Protocol selection: OJIP, NPQ1, NPQ2, NPQ3.
+1. **File Upload**
 
-2. **Table Manipulation**  
-   - Reordering columns, renaming, and averaging values.  
-   - Large "select/deselect all" button for columns.  
-   - Each column has a color picker and a text field for title editing.
+   * Supports CSV, TXT, TSV.
+   * Automatically detects separators and decimal delimiters.
+   * Protocol selection: OJIP, NPQ1, NPQ2, NPQ3.
 
-3. **Graphs**  
-   - **Transient (OJIP/NPQ)** – logarithmic axis for OJIP, linear for NPQ.  
-   - **Bar/Line Graphs** – display selected parameters as simple bars or scatter points.  
-   - **Boxplot** – Tukey HSD pairwise test for statistical significance (p ≤ 0.05). Requires at least two repetitions per variant with identical column names.
+2. **Table Manipulation**
 
-4. **Average & Rename**  
-   - Calculates the average of the selected columns (both transient data and parameters).  
-   - Assigns a new name to the resulting column.
+   * Column reordering, renaming, averaging.
+   * Large "select/deselect all" button.
+   * Color picker and editable title per column.
+   * **Batch renaming:** when multiple columns are selected, entering a new name in the text field of any selected column updates the names of all selected columns simultaneously. This feature ensures that boxplot statistics and other analyses that rely on consistent column naming work correctly.
 
-5. **CSV Export**  
-   - Exports selected columns in the order they were selected.  
-   - Password required for full functionality.  
-   - CSV formatted with tab delimiter and "." as decimal separator.
+3. **Graphs**
+
+   * Transient curves (logarithmic axis for OJIP, linear for NPQ).
+   * Bar/line graphs for selected parameters.
+   * Boxplots with Tukey HSD pairwise tests (p ≤ 0.05), requiring at least two repetitions per variant. Consistent column naming via batch renaming is necessary for correct statistical computation.
+
+4. **Average & Rename**
+
+   * Compute averages for selected columns.
+   * Assign new names to resulting columns.
+
+5. **CSV Export**
+
+   * Exports columns in selection order.
+   * Password-protected full functionality.
+   * Tab-delimited CSV with "." as decimal separator.
 
 ---
 
-## How to Use the App
+## How to Use
 
-1. Upload a CSV/TXT file and choose the correct delimiter.  
-2. Select the protocol for the experimental data (default: OJIP).  
-3. The table displays data: rows = time points/parameters, columns = experimental samples.  
-4. Select columns for plotting or calculations. The order of selection determines the plotting order.  
-5. Optionally, customize column color and title.  
-6. Save/export: select columns and press "save". Enter password if required.  
-7. Graphs:  
-   - Transient – select columns and click "draw transient"  
-   - Bar/Line – select parameter and click "draw bars / line"  
-   - Boxplot – requires at least two repetitions per variant; select columns accordingly
+1. Upload CSV/TXT and select delimiter.
+2. Choose protocol (default: OJIP).
+3. Table shows rows as time points/parameters, columns as samples.
+4. Select columns for plotting/calculation; selection order determines graph order.
+5. Customize column color/title if desired. **Renaming multiple columns:** typing a name in one of the text fields for a selected column applies it to all selected columns; this ensures that boxplot and statistical analyses function properly.
+6. Save/export selected columns; enter password if required.
+7. Graph plotting:
+
+   * Transient: select columns → "Draw Transient".
+   * Bar/Line: select parameter → "Draw Bars/Line".
+   * Boxplot: requires ≥2 repetitions per variant.
 
 ---
 
 ## Environment Setup
 
-- Database connection uses PostgreSQL or MySQL (depending on deployment).  
-- Environment variables (example for PostgreSQL): 
+* Database: PostgreSQL or MySQL.
+* Environment variables example (PostgreSQL):
 
 ```
 PG_HOST=<host>
@@ -79,7 +78,7 @@ PG_DB=<database>
 PG_PORT=5432
 ```
 
-- Example for MySQL:  
+* Example (MySQL):
 
 ```
 MYSQL_HOST=<host>
@@ -91,45 +90,46 @@ MYSQL_PORT=3306
 
 ---
 
-## Changelog / Updates
+## Changelog
 
-- v1.0 — Initial release; supports CSV/TXT upload, OJIP/NPQ protocols, graph plotting, CSV export.  
-- v1.1 — Added boxplot support with Tukey HSD; improved column selection UI.  
-- v1.2 — PostgreSQL support added; improved error handling for CSV parsing and DB operations.  
-- v1.3 — Deployment-ready setup for Render, environment variables handling.  
+* **v1.0** – Initial release, CSV/TXT upload, OJIP/NPQ protocols, graphs, CSV export.
+* **v1.1** – Added boxplot with Tukey HSD, improved column UI.
+* **v1.2** – PostgreSQL support, improved CSV parsing/DB error handling.
+* **v1.3** – Deployment-ready, environment variables support.
 
 ---
 
 ## Known Issues
 
-- Boxplot requires consistent naming of repetitions; incorrect titles break the calculation.  
-- Full version export requires password entry.  
-- Large CSV files may cause delays in rendering graphs due to client-side processing.  
-- Database connection requires proper environment configuration; cloud MySQL/PostgreSQL may need SSL setup.  
+* Boxplot requires consistent repetition names; batch renaming ensures correct statistical analysis.
+* Full CSV export needs password.
+* Large CSV files may slow client-side graph rendering.
+* Database connections require correct environment configuration; cloud DB may need SSL.
 
 ---
 
 ## Architecture & Technology
 
-- **Front-end:** HTML, CSS, JS, Chart.js  
-- **Back-end:** Node.js, Express.js  
-- **Database:** MySQL or PostgreSQL (using pool connections, async/await)  
-- **CSV Processing:** csv-parser, json2csv  
-- **Deployment:** Render.com
+* **Frontend:** HTML, CSS, JS, Chart.js
+* **Backend:** Node.js, Express.js
+* **Database:** MySQL/PostgreSQL, pooled async connections
+* **CSV Processing:** csv-parser, json2csv
+* **Deployment:** Render.com
 
 ---
 
 ## API
 
-| Method | Path | Description |
-|--------|------|------------|
-| GET | `/api/data` | Returns all database entries |
-| GET | `/api/:id/csv` | Returns CSV for a specific record |
-| POST | `/api/upload-csv` | Uploads CSV, converts to JSON, and saves to database |
-| DELETE | `/api/data/:id/csv` | Deletes a record from the database |
+| Method | Path                | Description                          |
+| ------ | ------------------- | ------------------------------------ |
+| GET    | `/api/data`         | Fetch all database entries           |
+| GET    | `/api/:id/csv`      | Fetch CSV for specific record        |
+| POST   | `/api/upload-csv`   | Upload CSV → JSON → save to database |
+| DELETE | `/api/data/:id/csv` | Delete record from database          |
 
 ---
 
 ## Contact
-M. Kolaksazov, PhD  
-Email: m.kolaksazov@gmail.com
+
+M. Kolaksazov, PhD
+Email: [m.kolaksazov@gmail.com](mailto:m.kolaksazov@gmail.com)
