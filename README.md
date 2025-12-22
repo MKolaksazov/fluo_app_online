@@ -22,7 +22,7 @@ Fluo App Online is a web application designed for extracting, processing, and an
    * Supports CSV, TXT, TSV.
    * Automatically detects separators and decimal delimiters.
    * Protocol selection: OJIP, NPQ1, NPQ2, NPQ3.
-   * **Updated CSV upload system:** improved stability and database integration for large datasets.
+   * Improved stability and database integration for large datasets.
 
 2. **Table Manipulation**
 
