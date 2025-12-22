@@ -29,13 +29,13 @@ Fluo App Online is a web application designed for extracting, processing, and an
    * Column reordering, renaming, averaging.
    * Large "select/deselect all" button.
    * Color picker and editable title per column.
-   * **Batch renaming:** when multiple columns are selected, entering a new name in the text field of any selected column updates all selected columns simultaneously. This ensures boxplot statistics and other analyses that rely on consistent column naming function correctly.
+   * Batch renaming of selected columns (required for Tukey HSD statistics of the boxplot graph).
 
 3. **Graphs**
 
    * Transient curves (logarithmic axis for OJIP, linear for NPQ).
    * Bar/line graphs for selected parameters.
-   * Boxplots with Tukey HSD pairwise tests (p ≤ 0.05), requiring at least two repetitions per variant. Batch renaming is necessary for correct statistical computation.
+   * Boxplots with Tukey HSD pairwise tests (p ≤ 0.05), requiring at least two repetitions per variant. Batch renaming is necessary for correct statistical computation. **Batch renaming:** when multiple columns are selected, entering a new name in the text field of any selected column updates all selected columns simultaneously. 
 
 4. **Average & Rename**
 
