@@ -17,6 +17,55 @@ The CSV upload system has been updated to improve stability when inserting large
 
 ---
 
+## Core Concept (Important)
+
+### How data is stored
+
+A *single uploaded file* is stored as **multiple database rows**, all sharing the same `filename`:
+
+| id | filename | json_data | created_at |
+|----|---------|-----------|------------|
+| 1 | sample.csv | [row data] | t1 |
+| 2 | sample.csv | [row data] | t1 |
+| 3 | sample.csv | [row data] | t1 |
+
+Each row contains **one logical row** of the *transposed* dataset.
+
+This design:
+- avoids oversized JSON payloads
+- avoids PostgreSQL / Express body limits
+- allows efficient reconstruction of the full dataset
+
+---
+
+## Upload Pipeline
+
+**Front-end (`processing.js`)**
+1. Experimental data exists as a 2D JS array
+2. Optional column selection / renaming
+3. Padding rows added (format requirement)
+4. Data is **transposed**
+5. Transposed array is sent as JSON (`csvText`)
+
+**Back-end (`data.js` → `services.js`)**
+1. Receives a 2D array
+2. Iterates row-by-row
+3. Inserts each row as JSON into the database
+4. All rows share the same `filename`
+
+---
+
+## Download / Reconstruction Pipeline
+
+1. User selects a file (by clicking its first DB entry)
+2. Backend resolves the `filename` from the selected `id`
+3. All rows with the same filename are fetched
+4. Rows are appended into a 2D array
+5. Data is **transposed back** to original orientation
+6. Array is converted to CSV (TSV format)
+
+---
+
 ## Main Features
 
 1. **File Upload**
