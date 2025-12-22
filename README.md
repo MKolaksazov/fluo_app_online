@@ -11,9 +11,7 @@
 
 ## Description
 
-Fluo App Online is a web application designed for extracting, processing, and analyzing experimental fluorescent data, compatible with CSV and TXT files. It allows users to select data columns and rows, apply experimental protocols for the FluorPen 110 (PSI, Czech Republic), plot transient OJIP and NPQ curves, compute averages, calculate OJIP and NPQ parameters, and export processed data.
-
-The CSV upload system has been updated to improve stability when inserting large datasets into the database; the system can handle a high number of columns before reaching client-side or backend limits.
+Fluo App Online is a web application designed for extracting, processing, and analyzing experimental fluorescent data, compatible with very large CSV and TXT files. It allows users to select and rename data columns, apply experimental protocols for the FluorPen 110 (PSI, Czech Republic), plot transient OJIP and NPQ curves, compute averages, calculate OJIP and NPQ parameters, and export processed data.
 
 ---
 
