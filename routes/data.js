@@ -7,10 +7,14 @@ const { Readable } = require('stream');
 
 function transpose(arrayData) { return arrayData[0].map((_, colIndex) => arrayData.map(row => row[colIndex])); }
 
+const authenticateJWT = require('../middleware/authenticateJWT');
+const authorizeRoles = require('../middleware/authorizeRoles');
+
 // GET all data
-router.get('/', async (req, res) => {
+router.get('/', authenticateJWT, authorizeRoles(['ADMIN', 'SUPERUSER', 'USER', 'GUEST']), async (req, res) => {
   try {
-    const rows = await getAllData();
+    const userId = req.user.role === 'GUEST' ? null : req.user.id; // req.body.user ?? 
+    const rows = await getAllData(userId);
     res.json(rows);
   } catch (err) {
     console.error('Error fetching data:', err);
@@ -36,23 +40,19 @@ router.get('/:id/csv', async (req, res) => {
 });
 
 // POST upload CSV
-router.post('/upload-csv', async (req, res) => {
+router.post('/upload-csv', authenticateJWT, authorizeRoles(['ADMIN', 'SUPERUSER', 'USER']), async (req, res) => {
   try {
-
+//console.log('upload successful!');
   const rows = req.body.csvText;
   const filename = req.body.csvName || 'uploaded_data.csv';
-
+  const userId = req.user.role === 'GUEST' ? null : req.user.id; // req.body.user ?? 
   //if (!csvText) return res.status(400).json({ status: 'error', message: 'CSV text is missing' });
-
   if (!Array.isArray(rows)) {
     return res.status(400).json({ error: "Invalid format" });
   }
-
   for (let i = 0; i < rows.length; i += 1) {
-    await insertData(rows[i], filename);
+    await insertData(rows[i], filename, userId);
   }
-
-    //const inserted = await insertData(rows, fileName);
     res.json({ status: 'ok', id: filename, rows: rows.length });
   } catch (err) {
     console.error('CSV parsing/DB error:', err);

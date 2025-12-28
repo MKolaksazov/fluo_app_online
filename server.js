@@ -1,16 +1,27 @@
 const express = require('express');
 const path = require('path');
 const db = require('./db');
-
 const app = express();
 const PORT = process.env.PORT || 3030;
 
-app.use(express.static('public'));
 app.use(express.json({ limit: '5mb' }));
+
+// Всички пътища без токен и role пренасочват към login.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+app.use(express.static('public'));
+
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
 
 // Главни API маршрути
 const dataRoutes = require('./routes/data');
 app.use('/api/data', dataRoutes);
+
+const adminRoutes = require('./routes/admin');
+app.use('/api/admin', adminRoutes);
 
 // Лог за всички заявки (добра практика)
 app.use((req, res, next) => {
@@ -23,7 +34,7 @@ db.connect(err => {
   if (err) {
     console.error('❌ Database connection failed:', err);
   } else {
-    console.log('✅ Connected to MySQL database');
+    console.log('✅ Connected to the database');
   }
 });
 

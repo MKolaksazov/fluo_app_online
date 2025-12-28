@@ -27,10 +27,8 @@ function makeTable(tableData) {
                     cell.appendChild(document.createTextNode(cellData));
                 }
             }
-
             row.appendChild(cell);
         });
-
         tableBody.appendChild(row);
     });
 
@@ -42,11 +40,7 @@ function makeTable(tableData) {
 // Бутон Select / Deselect All
 function makeSelectAllButton(cell, table) {
     var bAll = document.getElementById('toggle-all');
-    //bAll.setAttribute('id', 'toggle-all-btn');
-    //bAll.innerHTML = 'select / deselect All';
-    //bAll.style.margin = '5px';
     bAll.addEventListener('click', () => toggleAll(table));
-    //cell.appendChild(bAll);
 }
 
 // Header с бутон за цвят и текстово поле

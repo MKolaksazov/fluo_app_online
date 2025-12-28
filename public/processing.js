@@ -2,18 +2,20 @@
 document.getElementById("uploadCsv").addEventListener("click", async () => {
     var content = tableData;
     var fname = document.getElementById('export').value;
-    filename=`${fname}.csv`;
-    if (colsSelected.length > 0) { content = insertSelected(colsSelected); }
+    var filename = `${fname}.csv`;
+    if (colsSelected.size > 0) { content = insertSelected(colsSelected); } // .size is for Set(); .length is for Array()
     if (!content) { alert("Моля, въведете CSV текст!"); return; }
 
     // ⭐ 2. Името на файла вече не е налично, затова използваме генерично име или го питаме
     const fileName = (filename != "export.csv") ? filename : "manual_upload_" + new Date().toISOString() + ".csv"; 
+    const token = localStorage.getItem('token');
 
     try {
         // ⭐ 3. Изпращане на заявката с директния CSV стринг
         const response = await fetch("/api/data/upload-csv", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {     "Authorization": `Bearer ${token}`,  // ✅ Токенът от login
+                            "Content-Type": "application/json" },
             // Изпращаме генерично име и въведения CSV текст
             body: JSON.stringify({ csvName: fileName, csvText: content }) 
         });
@@ -24,7 +26,8 @@ document.getElementById("uploadCsv").addEventListener("click", async () => {
             alert(`Данните са изпратени успешно! ID: ${result.id}, редове: ${result.rows}`);
         } else {
             // Обработка на 4xx/5xx статус кодове от бекенда
-            alert(`Грешка при качването на CSV: ${result.message || 'Неизвестна грешка'}`);
+            if (result.error === "Forbidden") { alert('403: Unauthorized action! Please sign into your account!'); }
+            else { alert(`Грешка при качването на CSV: ${result.message || 'Неизвестна грешка'}`); }
         }
 
     } catch (err) {
@@ -35,8 +38,17 @@ document.getElementById("uploadCsv").addEventListener("click", async () => {
 //}
 
 document.getElementById('loadData').addEventListener('click', async () => {
-  const res = await fetch('/api/data/');
-  const data = await res.json();
+  const token = localStorage.getItem('token');
+ 
+  const response = await fetch("/api/data/", {
+      method: "GET",
+      headers: {     "Authorization": `Bearer ${token}`, }  // ✅ Токенът от login
+                     // "Content-Type": "application/json" },
+      // Изпращаме генерично име и въведения CSV текст
+      // body: JSON.stringify({ csvName: fileName, csvText: content }) 
+  });
+
+  const data = await response.json();
   const tbl = document.getElementById('tbl');
   const t1 = document.getElementById('table-1');
   if (t1 != null) { t1.remove(); }
@@ -51,18 +63,14 @@ document.getElementById('loadData').addEventListener('click', async () => {
   data.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
 
   tbody.innerHTML = `</br><tr><th>name</th><th>date</th><th></th><th></th></tr>`;
-  data.forEach(row => { tbody.innerHTML += `<tr id="r${row.id}" > <td>${row.filename || '(undefined)'}</td> <td>${row.created_at}</td> <td><button id="loadFile" class="btn text-dark aqua" onClick="loadFile('${row.id}')">Load file</button></td><td><button id="deleteFile" class="btn text-dark form-control aqua" onClick="deleteFile('${row.id}')">Delete file</button></td> </tr>`; });
+  data.forEach(row => { tbody.innerHTML += `<tr id="r${row.id}" > <td>${row.filename || '(undefined)'}</td> <td>${row.created_at}</td> <td><button id="loadFile" class="round-btn aqua" onClick="loadFile('${row.id}')">Load file</button></td><td><button id="deleteFile" class="round-btn aqua" onClick="deleteFile('${row.id}')">Delete file</button></td> </tr>`; });
 });
 
 async function loadFile(id_db){ 
-  //document.getElementById('loadFile').addEventListener('click', async () => {
     const res = await fetch('/api/data/'+id_db+'/csv');
     const data = await res.text();
     const table = document.getElementById('tbl');
-
-    //var delimiter = document.getElementById('delimiter').value;
     processCSV(data.replace(/"/g, ''), 'tab');
-  //});
 }
 
 function removeRow(idRow) {
@@ -153,7 +161,3 @@ function processCSV(contents, delimiter){
 }
 
 // ===========================================
-
-
-
-

@@ -104,7 +104,3 @@ document.getElementById('parameters').onchange = function() {
 document.getElementById('fileinput').addEventListener('change', readSingleFile);
 
 // ===========================================
-
-
-
-

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+    <title></title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel='stylesheet' href="https://bootswatch.com/4/yeti/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+          <link rel="stylesheet" href="glass.css">
+            <link rel="stylesheet" href="dropdown.css">
+        <link rel="stylesheet" href="https://pyscript.net/snapshots/2024.9.2/core.css">
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  .login-container { background: white; max-width: 400px; margin: auto; }
+  label { display: block; margin-top: 10px; }
+  input[type="text"], input[type="password"] { width: 90%; padding: 8px; margin-top: 5px; }
+  button { margin-top: 15px; padding: 10px 15px; }
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #eee;
+    text-align: center;
+}
+</style>
+        
+            </head>
+
+            <body class="d-flex flex-column min-vh-100">   <script>0</script>
+            <div class="containera mt-5">
+              <!--form -->
+              <div style="top: 0px; left: 5%; position: fixed; background: white; z-index: 7;" >
+              <h1 style="display:inline">Fluo App</h1> <span style="display:inline">web app for extracting fluorescent experimental data from the fluorometer FluorPen FP 110 </span>
+                <span id="userInfo" style="padding:10px; background:#eee;">
+                  <!-- ще се попълни динамично -->
+                </span>
+                <button type="button" class="aqua round-btn" onclick="logout();">logout</button>
+		</div></div> 
+		  <div class="login-container">
+		    <h2>Sign into your account:</h2>
+		    <form id="loginForm" class="">
+		      <label for="username" class="">Username</label>
+		      <input type="text" id="username" class="round-btn form-control" required>
+		      <label for="password" class="">Password</label>
+		      <input type="password" id="password" class="round-btn form-control" required>
+		      <button type="submit" class="aqua round-btn" >Login</button><!--button id="registerBtn" class="btn aqua">Register</button-->
+		    </form>
+		    </br>
+		    <p>Do not have an account? <a href="#" id="registerBtn">Sign up</a></p>
+		    <p>Or continue as <a href="#" id="guestBtn">Guest</a></p>
+		    <div id="message" style="color:red; margin-top:10px;"></div>
+		  </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+              <footer class="mt-auto" id="f-text" style="text-align: center; background: #eee;"></hr>
+              <!--p> To make use of the downloaded CSV files you should first have the encryption file, which can be found <a id="href" href="targetUrl">here</a> </p-->
+                <p>M. Kolaksazov, PhD; 2024-2026 <a href="mailto:hege@example.com">m.kolaksazov@gmail.com</a></p>
+              </footer>
+
+<!--                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
+                <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.js"></script>       <!--jstat.js is the normal version; jstat.min.js is the minimal version-->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+                <script src="https://cdn.jsdelivr.net/npm/@sgratzl/chartjs-chart-boxplot"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="logs.js"></script>
+                <!--script src="processing.js"></script>
+                <script src="encryption.js"></script>
+                <script src="table.js"></script>
+                <script src="graph.js"></script>
+                <script src="graph_params.js"></script>
+                <script src="graph_boxplot.js"></script-->
+
+<script>
+const loginForm = document.getElementById('loginForm');
+const message = document.getElementById('message');
+const guestBtn = document.getElementById('guestBtn');
+const registerBtn = document.getElementById('registerBtn');
+
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.user.username);
+      localStorage.setItem('role', data.user.role);
+      localStorage.setItem('username', data.user.username);
+      if (data.user.role === 'ADMIN') {
+        window.location.href = 'admin.html';
+      } else {
+        window.location.href = 'index.html';
+      }
+    } else {
+      message.textContent = data.error;
+    }
+  } catch (err) {
+    message.textContent = 'Server error';
+  }
+});
+
+// Guest mode
+guestBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  localStorage.setItem('role', 'GUEST');
+  localStorage.removeItem('token');
+  localStorage.removeItem('username');
+  window.location.href = 'index.html';
+});
+// register
+registerBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  //localStorage.setItem('role', 'GUEST');
+  //localStorage.removeItem('token');
+  //localStorage.removeItem('username');
+  window.location.href = 'register.html';
+});
+</script>
+</body>
+</html>

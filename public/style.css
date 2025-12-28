@@ -30,4 +30,4 @@ select, #protocol, #parameters { height: auto; cursor: pointer; }
 
 #tbl  { position: relative; top: 0%; left: 5%; margin-top: 3%;}
 #canvasContainer { width:85%; position: fixed; top: 12%; left: 7%; background: white; z-index: 7; box-shadow: 2px 3px 4px -2px #333; }
-
+.round-btn { border-radius: 5px 5px 5px 5px; padding: 5px; margin: 5px; }

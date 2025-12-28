@@ -9,10 +9,7 @@
         <link rel="stylesheet" href="style.css">
           <link rel="stylesheet" href="glass.css">
             <link rel="stylesheet" href="dropdown.css">
-        <link
-            rel="stylesheet"
-            href="https://pyscript.net/snapshots/2024.9.2/core.css"
-        />
+        <link rel="stylesheet" href="https://pyscript.net/snapshots/2024.9.2/core.css">
 
 <!--                         <script src="https://unpkg.com/chart.js"></script> -->
                 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.js"></script>
@@ -32,6 +29,10 @@
               <!--form -->
               <div style="top: 0px; left: 5%; position: fixed; background: white; z-index: 7;" >
               <h1 style="display:inline">Fluo App</h1> <span style="display:inline">web app for extracting fluorescent experimental data from the fluorometer FluorPen FP 110 </span>
+                <span id="userInfo" style="padding:5px 40px 10px 40px; margin: 0px; background:#eee;">
+                  <!-- ще се попълни динамично -->
+                </span>
+                <button type="button" class="aqua round-btn" onclick="logout();">logout</button>
               <div class="contaner" >
                 <div class="input-group-mb-3">
                   <span class="input-group-text" id="basic-addon1">delimiter: </span>
@@ -217,8 +218,8 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
               <footer class="mt-auto" id="f-text" style="text-align: center; background: #eee;"></hr>
-              <p> To make use of the downloaded CSV files you should first have the encryption file, which can be found <a id="href" href="targetUrl">here</a> </p>
-                <p>M. Kolaksazov, PhD; 2024 <a href="mailto:hege@example.com">m.kolaksazov@gmail.com</a></p>
+              <!--p> To make use of the downloaded CSV files you should first have the encryption file, which can be found <a id="href" href="targetUrl">here</a> </p-->
+                <p>M. Kolaksazov, PhD; 2024-2026 <a href="mailto:hege@example.com">m.kolaksazov@gmail.com</a></p>
               </footer>
 
 <!--                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
@@ -235,7 +236,7 @@
                 <script src="graph.js"></script>
                 <script src="graph_params.js"></script>
                 <script src="graph_boxplot.js"></script>
-
+                <script src="logs.js"></script>
 
 
               </body>
