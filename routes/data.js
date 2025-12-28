@@ -61,7 +61,7 @@ router.post('/upload-csv', authenticateJWT, authorizeRoles(['ADMIN', 'SUPERUSER'
 });
 
 // DELETE by ID
-router.delete('/:id/csv', async (req, res) => {
+router.delete('/:id/csv', authenticateJWT, authorizeRoles(['ADMIN', 'SUPERUSER', 'USER']), async (req, res) => {
   try {
     await deleteData(req.params.id);
     res.json({ status: 'ok' });

@@ -87,10 +87,10 @@ router.delete('/users/:id', async (req, res) => {
 router.get('/data', async (req, res) => {
   try {
     const { rows } = await db.query(`
-      SELECT d.id, d.filename, d.created_at, u.username
-      FROM data_storage d
-      LEFT JOIN users u ON u.id = d.user_id
-      ORDER BY d.created_at DESC
+      SELECT DISTINCT ON (d.filename) d.id, d.filename, d.created_at, u.username 
+      FROM data_storage d 
+      LEFT JOIN users u ON u.id = d.user_id 
+      ORDER BY d.filename, d.created_at DESC;
     `);
     res.json(rows);
   } catch (err) {

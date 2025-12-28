@@ -84,14 +84,19 @@ async function deleteFile(id_db) {
         alert("Грешка: Липсва ID на записа за изтриване.");
         return;
     }
+  
+    if (!confirm('Delete file?')) return;
 
     // ⭐ 1. Формиране на URL с ID-то
     const url = `/api/data/${id_db}/csv`; // Пример: /api/data/123
+    const token = localStorage.getItem('token');
 
     try {
         // ⭐ 2. Изпращане на DELETE заявка
         const response = await fetch(url, {
             method: 'DELETE', // Използваме DELETE метод
+            headers: {     "Authorization": `Bearer ${token}`, }  // ✅ Токенът от login
+
             //headers: { "Content-Type": "application/json" },
 
             // За DELETE заявки, тялото (body) обикновено е празно
@@ -106,7 +111,8 @@ async function deleteFile(id_db) {
         } else {
             // Четене на отговора за грешка
             const errorData = await response.json(); 
-            alert(`Грешка при изтриването на запис ${id_db}: ${errorData.message || response.statusText}`);
+            if (errorData.error === "Forbidden") { alert('403: Unauthorized action! Please sign into your account!'); }
+            else { alert(`Грешка при изтриването на запис ${id_db}: ${errorData.message || response.statusText}`); }
         }
 
     } catch (err) {

@@ -5,8 +5,9 @@ var data = {};
 // extract the column with the parameter
 // for each selected variant
 // and place the repeating values in an array
-function extractData(indices, tableData, parameter) {
+function extractData(inds, tableData, parameter) {
 
+  var indices = [...inds]; // convert from Set to Array
   var dict = []; // Create an empty array
   var iParam = tableData[0].indexOf(parameter);
   var transposed = transpose(tableData);
