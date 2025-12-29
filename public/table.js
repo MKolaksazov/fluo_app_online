@@ -3,6 +3,7 @@ var tbl = document.getElementById('tbl');
 var columnIndex = 0;
 const colsSelected = new Set();
 var newCol = [];
+makeSelectAllButton();
 
 // Функция за създаване на таблица
 function makeTable(tableData) {
@@ -19,7 +20,7 @@ function makeTable(tableData) {
             var cell = document.createElement('td');
 
             if (rowIndex === 0 && cellData === 'index') {
-                makeSelectAllButton(cell, table);
+                //makeSelectAllButton(table);
             } else {
                 if (rowIndex === 0 && cellIndex !== 0) {
                     makeColumnHeader(cellData, cell, table, cellIndex);
@@ -31,16 +32,15 @@ function makeTable(tableData) {
         });
         tableBody.appendChild(row);
     });
-
     table.appendChild(tableBody);
     tbl.innerHTML = '';
     tbl.appendChild(table);
 }
 
 // Бутон Select / Deselect All
-function makeSelectAllButton(cell, table) {
+function makeSelectAllButton() {
     var bAll = document.getElementById('toggle-all');
-    bAll.addEventListener('click', () => toggleAll(table));
+    bAll.addEventListener('click', () => toggleAll());
 }
 
 // Header с бутон за цвят и текстово поле
@@ -114,9 +114,11 @@ function updateColumnHighlight(table) {
 }
 
 // Select / Deselect All
-function toggleAll(table) {
-    const totalCols = table.rows[0].cells.length;
-    if (colsSelected.size < totalCols - 1) { // пропускаме първата колона с бутона
+function toggleAll() {
+    //const totalCols = table.rows[0].cells.length;
+    const table = document.getElementById('table-1');
+    const totalCols = table.childNodes[0].childNodes[0].children.length;
+    if (((colsSelected.size > totalCols/2 - 1) && (colsSelected.size < totalCols - 1)) || (colsSelected.size == 0)) { // пропускаме първата колона с бутона
         for (let i = 1; i < totalCols; i++) colsSelected.add(i);
     } else {
         colsSelected.clear();
@@ -153,5 +155,7 @@ function makeAverage(protocol) {
     });
 
     tableData.push(newCol);
-    toggleAll(table); // автоматично select/deselect на новата колона
+    colsSelected.clear();
+    updateColumnHighlight(table);
+    // toggleAll(); // автоматично select/deselect на новата колона
 }

@@ -34,7 +34,7 @@ console.log(secretKey);
 
 //const { generateKeyPairSync } = require('crypto');
 
-function _0x5d2a(){const _0x2fed86=['1584140TpZHhw','30744kfZlUZ','1558851OJxPGP','288GevFzX','107310VAZOKJ','2751dcb7863d345278a19fd66388cdf1ba94334959a6aed37763a7040a18a010','2998718nHtKQo','355jofPbN','1145928PBiwaM','131757WzlVaL'];_0x5d2a=function(){return _0x2fed86;};return _0x5d2a();}const _0x3669d0=_0x501f;(function(_0x485ccb,_0xa6f7c6){const _0x52d019=_0x501f,_0x2921fa=_0x485ccb();while(!![]){try{const _0x5540fc=parseInt(_0x52d019(0x1e5))/0x1+-parseInt(_0x52d019(0x1e3))/0x2+-parseInt(_0x52d019(0x1e6))/0x3+-parseInt(_0x52d019(0x1dd))/0x4+-parseInt(_0x52d019(0x1e4))/0x5*(-parseInt(_0x52d019(0x1e1))/0x6)+parseInt(_0x52d019(0x1df))/0x7+-parseInt(_0x52d019(0x1e0))/0x8*(-parseInt(_0x52d019(0x1de))/0x9);if(_0x5540fc===_0xa6f7c6)break;else _0x2921fa['push'](_0x2921fa['shift']());}catch(_0x2b5526){_0x2921fa['push'](_0x2921fa['shift']());}}}(_0x5d2a,0xc8b67));function _0x501f(_0x440753,_0x116b74){const _0x5d2af3=_0x5d2a();return _0x501f=function(_0x501f03,_0x5cf940){_0x501f03=_0x501f03-0x1dd;let _0x1ec98a=_0x5d2af3[_0x501f03];return _0x1ec98a;},_0x501f(_0x440753,_0x116b74);}const secretKey=_0x3669d0(0x1e2);
+//function _0x5d2a(){const _0x2fed86=['1584140TpZHhw','30744kfZlUZ','1558851OJxPGP','288GevFzX','107310VAZOKJ','2751dcb7863d345278a19fd66388cdf1ba94334959a6aed37763a7040a18a010','2998718nHtKQo','355jofPbN','1145928PBiwaM','131757WzlVaL'];_0x5d2a=function(){return _0x2fed86;};return _0x5d2a();}const _0x3669d0=_0x501f;(function(_0x485ccb,_0xa6f7c6){const _0x52d019=_0x501f,_0x2921fa=_0x485ccb();while(!![]){try{const _0x5540fc=parseInt(_0x52d019(0x1e5))/0x1+-parseInt(_0x52d019(0x1e3))/0x2+-parseInt(_0x52d019(0x1e6))/0x3+-parseInt(_0x52d019(0x1dd))/0x4+-parseInt(_0x52d019(0x1e4))/0x5*(-parseInt(_0x52d019(0x1e1))/0x6)+parseInt(_0x52d019(0x1df))/0x7+-parseInt(_0x52d019(0x1e0))/0x8*(-parseInt(_0x52d019(0x1de))/0x9);if(_0x5540fc===_0xa6f7c6)break;else _0x2921fa['push'](_0x2921fa['shift']());}catch(_0x2b5526){_0x2921fa['push'](_0x2921fa['shift']());}}}(_0x5d2a,0xc8b67));function _0x501f(_0x440753,_0x116b74){const _0x5d2af3=_0x5d2a();return _0x501f=function(_0x501f03,_0x5cf940){_0x501f03=_0x501f03-0x1dd;let _0x1ec98a=_0x5d2af3[_0x501f03];return _0x1ec98a;},_0x501f(_0x440753,_0x116b74);}const secretKey=_0x3669d0(0x1e2);
 // ===========================================
 
 function transpose(arrayData) {
@@ -71,9 +71,9 @@ function downloadBlob(content=tableData, filename=`export.csv`, contentType='tex
 
   var csv = arrayToCsv(content);
 
-  var pass = document.getElementById('pwd').value;
+  // var pass = document.getElementById('pwd').value;
   
-  if (pass != secretKey) { alert("CSV files can't be downloaded without the password!"); return; }
+  // if (pass != secretKey) { alert("CSV files can't be downloaded without the password!"); return; }
 
   // Create a blob
   var blob = new Blob([csv], { type: contentType });

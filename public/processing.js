@@ -141,7 +141,7 @@ function processCSV(contents, delimiter){
           const startNPQ1 = indexCol.indexOf("2443101");
           const startNPQ2 = indexCol.indexOf("207601");
 
-          var protocol = 'OJIP'//getProtocol();
+          var protocol = getProtocol();
 
           if (protocol == 'OJIP') { slicePoints = [startOJIP, startOJIP+457]; }
           else if (protocol == 'NPQ1') { slicePoints = [startNPQ1, 159+startNPQ1]; }
