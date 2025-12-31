@@ -119,7 +119,7 @@ function clearCanvasContainer() {
 
 //document.getElementById('drawParams').onclick(parameter = document.getElementById('drawParams').innerHTML);
 function drawParameters(protocol) {
-  if (colsSelected.length === 0) { alert('Error! Column(s) not selected!'); return; }  // else {  }
+  if (colsSelected.size === 0) { alert('Error! Column(s) not selected!'); return; }  // else {  }
 
   var speedCanvas = removeFlicker();
   var options = document.getElementById("parameters");

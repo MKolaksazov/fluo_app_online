@@ -59,7 +59,7 @@ function removeFlicker() {
 
 
 function drawGraph(protocol) {
-  if (colsSelected.length === 0) { alert('Error! Column(s) not selected!'); return; }   //else {  }
+  if (colsSelected.size === 0) { alert('Error! Column(s) not selected!'); return; }   //else {  }
 
   var speedCanvas = removeFlicker();
 

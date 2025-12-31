@@ -222,7 +222,7 @@ function assignLetters(comparisons) {
  *********************************************************/
 
 document.getElementById('drawBoxPlot').onclick = () => {
-  if (colsSelected.length === 0) { alert('Error! Column(s) not selected!'); return; }
+  if (colsSelected.size === 0) { alert('Error! Column(s) not selected!'); return; }
 
   var options = document.getElementById("parameters");
   var parameter = options[options.selectedIndex].text;
