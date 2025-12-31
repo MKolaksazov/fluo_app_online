@@ -1,18 +1,10 @@
-
-
 // https://github.com
-
 // const targetUrl = 'https://mkolaksazov.github.io/Telerik-Academy/JavaScript/csv_tool/key.md';
-
 //const targetUrl = 'https://mkolaksazov.github.io/Telerik-Academy/JavaScript/csv_tool/README.md';
-
 //var href = document.querySelector("#href");
 //href.setAttribute('href', targetUrl);
-
-
 // Place the 'generateSecretKey' function in your project
 //import CryptoJS, { AES } from 'crypto-js';
-
 /*
 const keyLength = 32; // 32 bytes = 256 bits (AES-256)
 const buffer = new Uint8Array(keyLength);
@@ -21,15 +13,11 @@ self.crypto.getRandomValues(buffer);
 function generateSecretKey() {
     return Array.from(buffer, (byte) => byte.toString(16).padStart(2, '0')).join('');
 }
-
 const secretKey = generateSecretKey();
-
 async function getSampleText() {
   return (await fetch(targetUrl).then(x=>x.text()));
 }
-
 console.log(secretKey);
-
 */
 
 //const { generateKeyPairSync } = require('crypto');
@@ -61,8 +49,10 @@ function arrayToCsv(data){
 function downloadBlob(content=tableData, filename=`export.csv`, contentType='text/csv;charset=utf-8;') {
   var fname = document.getElementById('export').value;
   filename=`${fname}.csv`;
-
-  if (colsSelected.length > 0) { content = insertSelected(colsSelected); }
+  
+  if (colsSelected.size > 0) { content = insertSelected(colsSelected); }
+  else { alert('Error! Column(s) not selected!'); return; } 
+  
   content = transpose(content);
 
   var times = 5; while(times--) {
