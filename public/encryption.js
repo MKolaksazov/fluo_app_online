@@ -27,19 +27,10 @@ async function downloadBlob(content=tableData, filename=`export.csv`, contentTyp
   });
   
   if (!authCheck.ok) {  // ← Backend казва НЕ
-    alert('Нямате права за сваляне!');
+    alert('Unauthorized action! Please upgrade to superuser.');
     return;
   }
 
-
-/*
-  const userRole = localStorage.getItem('role');
-  
-  if (!['ADMIN', 'SUPERUSER'].includes(userRole)) {
-    alert('Unauthorized action! Please upgrade to superuser.');
-    return;  // Спира изпълнението
-  }
-*/
   var fname = document.getElementById('export').value;
   filename=`${fname}.csv`;
   
