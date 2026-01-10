@@ -71,5 +71,14 @@ router.delete('/:id/csv', authenticateJWT, authorizeRoles(['ADMIN', 'SUPERUSER',
   }
 });
 
+// Backend - НОВ route
+router.get('/check-download-permission', 
+  authenticateJWT, 
+  authorizeRoles(['ADMIN', 'SUPERUSER']), 
+  (req, res) => {
+    res.json({ allowed: true });  // ← Стига само ако role е правилна
+  }
+);
+
 module.exports = router;
 

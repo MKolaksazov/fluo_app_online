@@ -41,13 +41,41 @@ async function loadUsers() {
         <td>${u.id}</td>
         <td>${u.username}</td>
         <td>${u.email}</td>
-        <td>${u.role}</td>
+        <td>
+          <select id="uid${u.id}" name="userRole" class="form-control" onchange="upgradeUser('${u.id}', this.value)" >
+            <option value="USER" ${u.role === 'USER' ? 'selected' : ''}>USER</option>
+            <option value="SUPERUSER" ${u.role === 'SUPERUSER' ? 'selected' : ''}>SUPERUSER</option>
+            <option value="ADMIN" ${u.role === 'ADMIN' ? 'selected' : ''}>ADMIN</option>
+          </select>
+        </td>
         <td>
           <button onclick="deleteUser(${u.id})">❌</button>
         </td>
       </tr>
     `;
   });
+}
+
+async function upgradeUser(id, newRole) {
+  if (!confirm('Update user?')) return;
+  const response = await api(`${API}/users/${id}/role`, { method: 'PATCH' ,
+            headers: {  
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+            },
+            // Изпращаме генерично име и въведения CSV текст
+            body: JSON.stringify({ role: newRole })});
+        const result = await response.json();
+
+        if (response.ok) {
+            alert(`Update successful!`);
+        } else {
+            // Обработка на 4xx/5xx статус кодове от бекенда
+            if (result.error === "Forbidden") { alert('403: Unauthorized action! Please sign into your account!'); }
+            else { alert(`Error: ${result.message || 'Unknown error!'}`); }
+        }
+
+  loadUsers();
 }
 
 async function deleteUser(id) {

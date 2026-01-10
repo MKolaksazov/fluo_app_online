@@ -50,15 +50,11 @@ router.post('/users', async (req, res) => {
 });
 
 // Промяна на роля
-router.put('/users/:id/role', async (req, res) => {
-  const { role } = req.body;
-
+router.patch('/users/:id/role', async (req, res) => {
+  const newRole = req.body.role;
   try {
-    await db.query(
-      'UPDATE users SET role = $1 WHERE id = $2',
-      [role, req.params.id]
-    );
-
+    await db.query( 'UPDATE users SET role = $1 WHERE id = $2',
+      [newRole, req.params.id] );
     res.json({ message: 'Role updated' });
   } catch (err) {
     console.error(err);
