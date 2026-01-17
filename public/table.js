@@ -53,13 +53,13 @@ function makeColumnHeader(text, cell, table, colIndex) {
     // Бутон за избор на цвят
     const colorBtn = document.createElement("button");
     colorBtn.textContent = "pick color";
-    colorBtn.setAttribute("class", "colorBtn");
+    colorBtn.setAttribute("class", "colorBtn form-control");
     colorBtn.style.marginRight = "5px";
 
     // Текстово поле за имената на колоните
     const inputText = document.createElement("input");
     inputText.setAttribute("type", "text");
-    inputText.setAttribute("class", "sampleLabel");
+    inputText.setAttribute("class", "sampleLabel input-text");
     inputText.setAttribute("value", text);
 
     // Добавяне на елементи към клетката
@@ -108,7 +108,7 @@ function batchRename(newName, table) {
 function updateColumnHighlight(table) {
     Array.from(table.rows).forEach(row => {
         Array.from(row.cells).forEach((cell, idx) => {
-            cell.style.backgroundColor = colsSelected.has(idx) ? "lightgreen" : "";
+            cell.style.backgroundColor = colsSelected.has(idx) ? "rgba(190,110,40,0.28)" : "";
         });
     });
 }

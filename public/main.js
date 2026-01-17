@@ -11,8 +11,9 @@ window.onload = function(){
 }
 
 function getProtocol() {
-  var options = document.getElementById('protocol');
-  var protocol = options[options.options.selectedIndex].text;
+  //var options = document.getElementById('protocol');
+  var protocol = document.querySelector('.selected').textContent.trim()
+  //var protocol = options[options.options.selectedIndex].text;
   document.getElementById('makeAvg').setAttribute('onclick', `makeAverage('${protocol}')`);
   document.getElementById('makeGr').setAttribute('onclick', `drawGraph('${protocol}')`);
   document.getElementById('drawParams').setAttribute('onclick', `drawParameters('${protocol}')`);
@@ -25,6 +26,7 @@ document.getElementById('protocol').addEventListener('change', setProtocol);
 function setProtocol() {
   var protocol = getProtocol();
   // optionsArray
+console.log('protocol');
   if (protocol == "OJIP") {
     var optionsArr = [
     "Phi_Po",

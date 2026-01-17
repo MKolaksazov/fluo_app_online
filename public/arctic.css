@@ -1,0 +1,317 @@
+/* ================= MODERN UI OVERRIDES FOR EXISTING index.html =================
+   ЦЕЛ: Glassmorphism / Fluid / Minimal (2020–2025)
+   ▸ НЕ пипа HTML структурата
+   ▸ НЕ пипа JS логиката
+   ▸ Работи ВЪРХУ текущите класове: .aqua, .btn, .input-group-text, .form-control, .dropdown-menu
+*/
+
+/* ==================== FONT ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200;400;600;800&display=swap');
+
+/* ---------- GLOBAL ---------- */
+body {
+  background: linear-gradient(135deg, #1a2332 0%, #2a3d52 50%, #1a2332 100%);
+  font-family: 'Oxanium', sans-serif;
+}
+
+h1, span { color: #e6edf3; }
+
+/* ---------- FIX WHITE BLOCKS ---------- */
+#canvasContainer,
+footer,
+.containera > div {
+  background: rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  /* border-radius: 18px; */
+  box-shadow: 0 16px 40px rgba(0,0,0,.35);
+}
+
+#canvasContainer {
+  width:85%; position: fixed; top: 12%; left: 7%; z-index: 7; box-shadow: 2px 3px 4px -2px #333;
+}
+
+/* ---------- BUTTONS (GLOBAL) ---------- */
+ .buttons-container {
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:1px;
+
+ width:100px;
+ heght:20px;
+  padding:2px 2px;
+  background:linear-gradient(#2a3f55, #182a3a);
+  border:none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+  color:#d9ecff;
+  font-size:14px;
+  cursor:pointer;
+  clip-path: polygon(10% 0%, 100% 0%, 100% 20%, 90% 100%, 0% 100%, 0% 80%);
+}
+
+.btn,
+.aqua,
+.input-group-text {
+width:120px;heght:10px;
+  padding:2px; /* дебелина на рамката */
+  background:linear-gradient(#6bb6ff, #2f6fb3);
+  clip-path: polygon(10% 0%, 100% 0%, 100% 20%, 90% 100%, 0% 100%, 0% 80%);
+}
+
+.btn:hover,
+.aqua:hover {
+  background: rgba(255,255,255,0.22) !important;
+
+}
+
+.btn:active,
+.aqua:active {
+/*
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.35); */
+}
+
+/* ---------- INPUTS / SELECTS ---------- */
+.form-control,
+select {
+  background: rgba(255,255,255,0.10) !important;
+  color: #f1f6fa !important;
+  border: none !important;
+/* width: auto;
+   border-radius: 14px !important;
+ width:50%;   added to the original AI design */
+}
+
+/* ---------- DROPDOWNS ---------- */
+.dropdown-menu {
+  background: rgba(20,30,40,.85) !important;
+  backdrop-filter: blur(16px);
+  border: none;
+height:500%; width: 500%; /* box-shadow: 0 20px 40px rgba(0,0,0,.45);  border-radius: 16px; added to the original AI design */
+}
+
+.dropdown-menu * {
+  color: #e6edf3 !important;
+}
+
+/* ---------- REMOVE LEGACY NOISE ---------- */
+.button:after,
+.button .glare,
+.down-arrow {
+  display: none !important;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background: rgba(255,255,255,0.06) !important;
+  color: #cdd6df;
+}
+
+/* ================= END ================= */
+
+/* added to the original AI design */
+
+.contaner { display:flex; }
+
+.input-group-mb-3 { display: flex; width: 10%; flex: 0 0 auto;   }
+
+#tbl  { position: relative; top: 0%; left: 1%; right: 99%; margin-top: 3%;}
+
+
+
+
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200;400;600;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ==================== TAB BUTTONS ==================== */
+.tabs-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  margin: 6px;
+  z-index: 100;
+  padding: 8px 16px;
+
+  background: linear-gradient(135deg, #1a2332 0%, #2a3d52 50%, #1a2332 100%);
+  font-family: 'Oxanium', sans-serif;
+  color: #e0e0e0;
+
+  border: none !important;
+/*  border-radius: 14px !important; */
+  box-shadow:
+  inset 0 1px 0 rgba(255,255,255,.18),
+  0 6px 16px rgba(0,0,0,.25);
+}
+
+.tab-btn {
+  width: 120px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  margin-left: -8px;
+
+  /* Тъмносин градиент */
+  background: linear-gradient(135deg, #2c4456 0%, #4a6b7c 50%,#2c4456 100%);
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  position: relative;
+  clip-path: polygon(10% 0%, 100% 0%, 100% 20%, 90% 100%, 0% 100%, 0% 80%);
+}
+.tab-btn-frame {
+  width: 98%;
+  height: 94%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  margin-left: -0px;
+
+  /* Тъмносин градиент */
+  background: linear-gradient(75deg, #1e3040 98%, #4a6b7c 120%);
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  /* Базови сенки */
+  box-shadow:
+  0 12px 18px rgba(0, 0, 0, 0.4),
+  inset 0 2px 10px rgba(255, 255, 255, 0.1);
+
+  position: relative;
+  clip-path: polygon(10% 0%, 100% 0%, 100% 20%, 90% 100%, 0% 100%, 0% 80%);
+}
+/* Glow ефект на рамката при normal state */
+.tab-btn::after .tab-btn-frame::after{
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  /* border-radius: inherit; */
+  opacity: 0.5;
+  filter: blur(4px);
+  background: transparent;
+  border: 2px solid #4a6b7c;
+  clip-path: polygon(10% 0%, 100% 0%, 100% 20%, 90% 100%, 0% 100%, 0% 80%);
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.tab-btn-frame:hover:not(.selected) {
+  background: linear-gradient(135deg, #3a5366 0%, #2c4456 100%);
+  border-color: #5d7c8f;
+}
+
+.tab-btn-frame:hover:not(.selected)::after {
+  border-color: #5d7c8f;
+  filter: blur(6px);
+  opacity: 0.7;
+}
+
+/* SELECTED STATE - оранжев с GLOW */
+.tab-btn.selected {
+  /* Наситен оранжев градиент */
+  background: linear-gradient(135deg, #f09960 0%, #f09960 50%, #f09960 100%);
+
+  z-index: -10;
+  clip-path: polygon(10% 0%, 100% 0%, 100% 20%, 90% 100%, 0% 100%, 0% 80%);
+}
+
+.tab-btn-frame.selected{
+  /* Наситен оранжев градиент */
+  background: linear-gradient(0deg, #c5683a 0%, #99511e 15%, #6b3c21 41%, #6b3c21 58%, #99511e 85%, #c5683a 110%);
+
+  box-shadow:
+  0 4px 12px rgba(0, 0, 0, 0.5),
+  inset -15px 1px 15px rgba(186, 89, 42, 0.5);
+  z-index: -10;
+  clip-path: polygon(10% 0%, 100% 0%, 100% 20%, 90% 100%, 0% 100%, 0% 80%);
+}
+
+/* МОЩЕН GLOW на оранжевата рамка */
+.tab-btn.selected::after .tab-btn-frame.selected::after{
+  border: 8px solid #f09960;
+  filter: blur(8px);
+  opacity: 1;
+  box-shadow:
+  0 0 15px rgba(240, 153, 96, 0.8),
+  0 0 30px rgba(240, 153, 96, 0.5);
+  clip-path: polygon(10% 0%, 100% 0%, 100% 20%, 90% 100%, 0% 100%, 0% 80%);
+}
+
+.tab-btn.selected .tab-btn-frame.selected .tab-btn-text {
+  font-family: 'Oxanium', sans-serif;
+  color: #ccc;
+  /* text-shadow: 0 1px 3px rgba(255, 255, 255, 0.4); */
+  font-weight: 500;
+  /* clip-path: polygon(10% 0%, 100% 0%, 100% 20%, 90% 100%, 0% 100%, 0% 80%); */
+}
+
+.tab-btn-icon {
+  font-size: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  clip-path: polygon(10% 0%, 100% 0%, 100% 20%, 90% 100%, 0% 100%, 0% 80%);
+}
+
+.tab-btn.selected .tab-btn-frame.selected .tab-btn-icon {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+  clip-path: polygon(10% 0%, 100% 0%, 100% 20%, 90% 100%, 0% 100%, 0% 80%);
+}
+
+.tab-btn-text {
+  font-family: 'Oxanium', sans-serif;
+  font-size: 16px;
+  font-weight: 500px;
+  color: #ccc;
+  /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); */
+  transition: all 0.3s ease;
+}
+
+/* ==================== DEMO INFO ==================== */
+.demo-info {
+  margin-top: 180px;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.demo-info h1 {
+  color: #e8f4f8;
+  margin-bottom: 25px;
+  font-size: 26px;
+}
+
+.demo-info p {
+  color: #b0c4d0;
+  line-height: 1.8;
+  margin-bottom: 10px;
+  font-size: 15px;
+  text-align: left;
+}
+
+.demo-info strong {
+  color: #d97846;
+}
+
+.check {
+  color: #5dde8f;
+  margin-right: 8px;
+}
