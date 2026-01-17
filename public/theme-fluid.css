@@ -1,0 +1,139 @@
+/* ==================== FLUID ТЕМА ==================== */
+
+body {
+  background: linear-gradient(120deg, #0f2027, #203a43, #2c5364) !important;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif !important;
+  color: #e6edf3;
+}
+
+h1, span {
+  color: #e6edf3;
+}
+
+/* White blocks с glassmorphism */
+#canvasContainer,
+footer,
+.containera > div {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Бутони */
+.btn,
+.aqua,
+.input-group-text,
+.text-left {
+  background: transparent !important;
+  color: #f1f6fa !important;
+  border: 1px solid transparent !important;
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+}
+
+.btn:hover,
+.aqua:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.btn:active,
+.aqua:active {
+
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Inputs / Selects */
+.form-control,
+select,
+.input-text {
+  background: rgba(0, 0, 0, 0.0) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+  color: #f1f6fa !important;
+  border: 1px solid rgba(206, 238, 153, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 6px 10px;
+}
+
+/* Таблица */
+.table {
+  color: #f1f6fa;
+}
+
+/* Input group */
+.input-group-mb-3 {
+  width: 140px;
+  margin: 1px;
+  box-shadow: 2px 3px 4px -2px #333;
+  border-radius: 8px;
+}
+
+/* Dropdown menu */
+.dropdown-menu,
+.dropdown-content {
+  background: rgba(20, 30, 40, 0.95) !important;
+  backdrop-filter: blur(16px);
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45) !important;
+  color: #e6edf3 !important;
+}
+
+.dropdown-content li {
+  color: #e6edf3 !important;
+}
+
+/* Legacy елементи - премахване */
+.button:after,
+.button .glare,
+.down-arrow {
+  display: none !important;
+}
+
+/* Footer */
+footer {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #cdd6df;
+}
+
+/* ==================== BORDER RADIUS OVERRIDE ЗА FLUID ==================== */
+/* Fluid темата използва силно заоблени форми за всички бутони */
+
+.btn-left,
+.btn-middle,
+.btn-right,
+.btn-single {
+  border-radius: 20px !important;
+}
+
+/* ==================== TAB BUTTONS ==================== */
+.tabs-container {
+  border: none !important;
+  border-radius: 14px !important;
+  box-shadow:
+  inset 0 1px 0 rgba(255, 255, 255, 0.18),
+  0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.tab-btn {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  color: #cdd6df;
+}
+
+.tab-btn:hover:not(.selected) {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.tab-btn.selected {
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow:
+  0 1px 1px rgba(0, 0, 0, 0.5),
+  inset -21px 31px 31px rgba(0, 0, 0, 0.5);
+  color: #e6edf3;
+}

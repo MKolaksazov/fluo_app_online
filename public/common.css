@@ -1,0 +1,180 @@
+/* ==================== ОБЩИ СТИЛОВЕ ЗА ВСИЧКИ ТЕМИ ==================== */
+
+/* Общи reset стилове */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Скриване на file input */
+input[type="file"] {
+  display: none;
+}
+
+/* Основни контейнери */
+.contaner {
+  display: flex;
+}
+
+.input-group-mb-3 {
+  display: flex;
+  width: 10%;
+  flex: 0 0 auto;
+}
+
+.bi {
+  margin: 0 8px 0 8px;
+}
+
+/* Таблица */
+#tbl {
+position: relative;
+top: 0%;
+left: 1%;
+right: 99%;
+margin-top: 3%;
+}
+
+/* Canvas контейнер */
+#canvasContainer {
+width: 85%;
+position: fixed;
+top: 12%;
+left: 7%;
+z-index: 7;
+box-shadow: 2px 3px 4px -2px #333;
+}
+
+/* Inline стилове от HTML изнесени в CSS */
+.header-fixed {
+  top: 0px;
+  left: 2%;
+  width: 96%;
+  position: fixed;
+  z-index: 7;
+}
+
+.app-title {
+  display: inline;
+}
+
+#userInfo {
+padding: 5px 40px 10px 40px;
+margin: 0px;
+}
+
+.action-buttons {
+  padding: 8px;
+}
+
+footer {
+  text-align: center;
+}
+
+footer .hidden-spacer {
+  float: left;
+  visibility: hidden;
+}
+
+footer .app-year {
+  float: left;
+}
+
+/* Dropdown меню */
+.dropdown-menu,
+.dropdown-content {
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  list-style: none;
+  padding: 10px;
+}
+
+.dropdown-content li {
+  padding: 5px 0;
+}
+
+#info {
+margin-bottom: 10px;
+}
+
+/* Бутони група */
+.btn-group {
+  margin: 1px;
+  margin-left: 5px;
+  display: flex;
+}
+
+.btn-group > a {
+  text-decoration: none;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+/* Select елементи */
+select,
+#protocol,
+#parameters {
+height: auto;
+cursor: pointer;
+}
+
+/* MyChart */
+#myChart {
+height: 0px;
+}
+
+/* Round buttons */
+.round-btn {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
+
+/* ==================== BORDER RADIUS СИСТЕМА ЗА БУТОНИ ==================== */
+/* Тези класове дефинират заобляне според позицията в btn-group */
+
+/* Ляв бутон - заоблен отляво */
+.btn-left, .text-left {
+  border-radius: 5px 1px 1px 5px !important;
+  margin-right: 0 !important;
+}
+
+/* Среден бутон - без заобляне */
+.btn-middle {
+  border-radius: 1px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Десен бутон - заоблен отдясно */
+.btn-right {
+  border-radius: 1px 5px 5px 1px !important;
+  margin-left: 0 !important;
+}
+
+/* Самостоятелен бутон - заоблен от двете страни */
+.btn-single {
+  border-radius: 5px !important;
+}
+
+/* ==================== TAB BUTTONS ==================== */
+.tabs-container {
+  display: flex;
+  gap: 4px;
+  margin: 6px;
+  padding: 8px 16px;
+}
+
+.tab-btn {
+  width: 120px;
+  height: 28px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 14px;
+
+}
