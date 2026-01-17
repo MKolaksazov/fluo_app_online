@@ -6,6 +6,10 @@ body {
   font-family: "DejaVu Sans Light", "Oxanium", sans-serif;
 }
 
+.close-button > svg {
+  color: black;
+}
+
 /* Контейнери */
 .contaner {
   padding: 0px;

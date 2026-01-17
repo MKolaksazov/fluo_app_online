@@ -19,7 +19,9 @@ var labels = [];
 //var speedCanvas = document.getElementById("myChart");
 
 Chart.defaults.defaultFontFamily = "Lato, sans-serif"; // for version v2 Chart.defaults.global.defaultFontSize = 16;
+Chart.defaults.color = 'black';
 Chart.defaults.defaultFontSize = 16;
+//Chart.defaults.CHART_COLORS = 'black';
 //checked(checkboxes);
 function loopData(indices) {
   dataSets = [];
@@ -154,6 +156,9 @@ function drawGraph(protocol) {
           //     chartObj.ticks.push(359220701);
           //     chartObj.ticks.push(480913301);
           // },
+          //grid: {
+          //  color: 'black'
+          //},
       },
 
       y: {
@@ -165,6 +170,7 @@ function drawGraph(protocol) {
           ticks: {
               min: 0, //minimum tick
               // max: 20000, //maximum tick
+              fontColor: 'black'
           },
       }
 

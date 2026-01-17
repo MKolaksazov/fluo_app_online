@@ -26,7 +26,6 @@ document.getElementById('protocol').addEventListener('change', setProtocol);
 function setProtocol() {
   var protocol = getProtocol();
   // optionsArray
-console.log('protocol');
   if (protocol == "OJIP") {
     var optionsArr = [
     "Phi_Po",
@@ -93,7 +92,7 @@ document.getElementById('parameters').onchange = function() {
 
           r.onload = function(e) {
               var contents = e.target.result;
-              info.innerHTML = ("File <mark>" + f.name + "</mark> uploaded! " + " <b>" + f.type + "</b> " + " " + f.size/1000 + " kB");
+              info.innerHTML = ("File <b>" + f.name + "</b> uploaded! " + " <b>" + f.type + "</b> " + " " + f.size/1000 + " kB");
 
               var delimiter = document.getElementById('delimiter').value;
               processCSV(contents, delimiter);

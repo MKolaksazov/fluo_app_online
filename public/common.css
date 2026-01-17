@@ -44,6 +44,7 @@ top: 12%;
 left: 7%;
 z-index: 7;
 box-shadow: 2px 3px 4px -2px #333;
+background-color: white;
 }
 
 /* Inline стилове от HTML изнесени в CSS */
