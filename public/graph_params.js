@@ -107,6 +107,58 @@ function closeButton() {
   });
 }
 
+function gridButton(draw, protocol) {
+  const gridButton = document.createElement("button");
+
+  gridButton.innerHTML = `grid on/off`;
+  gridButton.id = "grid-button"; // Add a class for styling
+  gridButton.classList.add('btn-right');
+  gridButton.classList.add('aqua');
+  gridButton.style.cssText = "position: relative; display: float; background: transparent; color: white; border: none; padding: 5px; cursor: pointer;";
+
+  // Attach the close button to the canvas container
+  const canvasContainer = document.getElementById("canvasContainer");
+  canvasContainer.appendChild(gridButton);
+
+  // Add a click event listener to the close button
+  gridButton.addEventListener("click", () => {
+    if (grid) { grid = false; } else { grid = true; }
+    document.getElementById('grid-button').remove();
+    document.getElementById('font-button').remove();
+    if (draw == 'graph') { drawGraph(protocol); }
+    if (draw == 'parameters') { drawParameters(protocol); }
+    if (draw == '') {}
+  });
+}
+
+function fontButton(draw, protocol) {
+  // Create the close button element
+  const fontButton = document.createElement("input");
+  fontButton.innerHTML = `change font`;
+  fontButton.type = 'range';
+  fontButton.min = '8';
+  fontButton.max = '32';
+  fontButton.value = Chart.defaults.font.size;
+  fontButton.id = "font-button"; // Add a class for styling
+  fontButton.classList.add('aqua');
+  fontButton.classList.add('btn-right');
+  fontButton.style.cssText = "position: relative; display: float; background: transparent; color: white; border: none; padding: 5px; cursor: pointer;";
+
+  // Attach the close button to the canvas container
+  const canvasContainer = document.getElementById("canvasContainer");
+  canvasContainer.appendChild(fontButton);
+
+  // Add a click event listener to the close button
+  fontButton.addEventListener("click", () => {
+    document.getElementById('grid-button').remove();
+    document.getElementById('font-button').remove();
+    Chart.defaults.font.size = fontButton.value;
+    if (draw == 'graph') { drawGraph(protocol); }
+    if (draw == 'parameters') { drawParameters(protocol); }
+    if (draw == '') {}
+  });
+}
+
 function clearCanvasContainer() {
   // Remove all child elements from the canvas container
   const canvasContainer = document.getElementById("canvasContainer");
@@ -121,13 +173,16 @@ function clearCanvasContainer() {
 //document.getElementById('drawParams').onclick(parameter = document.getElementById('drawParams').innerHTML);
 function drawParameters(protocol) {
   if (colsSelected.size === 0) { alert('Error! Column(s) not selected!'); return; }  // else {  }
+ 
+  gridButton('parameters', protocol);
+  fontButton('parameters', protocol);
+  closeButton();
 
+  var blackGrid = drawGrid();
   var speedCanvas = removeFlicker();
   var options = document.getElementById("parameters");
   var parameter = options[options.selectedIndex].text;
   var displayLegend = false;
-
-  closeButton();
 
   loopDataParams(colsSelected, parameter);
 
@@ -172,6 +227,7 @@ function drawParameters(protocol) {
           title: {
               display: true,
           },
+          grid: blackGrid,
       },
 
       y: {
@@ -183,6 +239,7 @@ function drawParameters(protocol) {
           ticks: {
               min: 0,
           },
+          grid: blackGrid,
       }
     };
 

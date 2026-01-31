@@ -17,10 +17,13 @@ function arr2obj(arr) {
 var dataSets = [];
 var labels = [];
 //var speedCanvas = document.getElementById("myChart");
+var grid = false;
 
 Chart.defaults.defaultFontFamily = "Lato, sans-serif"; // for version v2 Chart.defaults.global.defaultFontSize = 16;
-Chart.defaults.color = 'black';
-Chart.defaults.defaultFontSize = 16;
+Chart.defaults.color = '#808080'; // 'black';
+Chart.defaults.font.size = 16;
+Chart.defaults.scale.border.color = '#808080';
+//Chart.defaults.defaultFontSize = 32;
 //Chart.defaults.CHART_COLORS = 'black';
 //checked(checkboxes);
 function loopData(indices) {
@@ -54,19 +57,34 @@ function removeFlicker() {
   speedCanvas.setAttribute('id', 'myChart');
   // speedCanvas.style.height = '500px';
   speedCanvas.style.width = 'max-content';
+  speedCanvas.style.height = 'max-content';
   canvasContainer.appendChild(speedCanvas);
 
   return speedCanvas;
 }
 
+function drawGrid() {
+  var blackGrid = { color: '', };
+  if (grid) {
+    blackGrid = {
+            color: '#808080',
+            lineWidth: 1,
+            drawBorder: true,
+          };
+  }
+  else { blackGrid = { color: '', lineWidth: 0, }; }
+  return blackGrid;
+}
 
 function drawGraph(protocol) {
   if (colsSelected.size === 0) { alert('Error! Column(s) not selected!'); return; }   //else {  }
 
-  var speedCanvas = removeFlicker();
-
+  gridButton('graph', protocol);
+  fontButton('graph', protocol);
   closeButton();
   loopData(colsSelected);
+  var blackGrid = drawGrid();
+  var speedCanvas = removeFlicker();
 
   if (protocol == 'OJIP') {
 
@@ -108,7 +126,7 @@ function drawGraph(protocol) {
           //         chartObj.ticks.push(100000);
           //         chartObj.ticks.push(1000000);
           //     }
-
+          grid: blackGrid,
       },
       y: {
           display: true,
@@ -120,6 +138,7 @@ function drawGraph(protocol) {
               min: 0, //minimum tick
               //max: 70000, //maximum tick
           },
+          grid: blackGrid,
       }
     };
   }
@@ -156,9 +175,7 @@ function drawGraph(protocol) {
           //     chartObj.ticks.push(359220701);
           //     chartObj.ticks.push(480913301);
           // },
-          //grid: {
-          //  color: 'black'
-          //},
+          grid: blackGrid,
       },
 
       y: {
@@ -172,6 +189,7 @@ function drawGraph(protocol) {
               // max: 20000, //maximum tick
               fontColor: 'black'
           },
+          grid: blackGrid,
       }
 
   };}
