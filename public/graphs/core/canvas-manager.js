@@ -97,8 +97,9 @@ class CanvasManager {
     return canvas ? canvas.getContext('2d') : null;
   }
 }
-
+/*
 // Export
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = CanvasManager;
 }
+*/

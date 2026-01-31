@@ -96,8 +96,9 @@ function initializeChartDefaults() {
     Chart.defaults.scale.border.color = ChartConfig.defaults.borderColor;
   }
 }
-
+/*
 // Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = ChartConfig;
 }
+*/

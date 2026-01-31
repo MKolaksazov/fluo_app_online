@@ -235,8 +235,9 @@ class StatisticalAnalyzer {
     return letterMatrix.map(row => row.join(''));
   }
 }
-
+/*
 // Export
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = StatisticalAnalyzer;
 }
+*/

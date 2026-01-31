@@ -123,8 +123,9 @@ const StringUtils = {
     return name;
   }
 };
-
+/*
 // Export utilities
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { ArrayUtils, MathUtils, StringUtils };
 }
+*/

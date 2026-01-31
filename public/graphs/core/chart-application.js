@@ -195,7 +195,7 @@ function drawBoxplot() {
 
 // Attach the function to the button
 document.getElementById('drawBoxPlot').setAttribute('onclick', `drawBoxplot();`);
-
+/*
 // Export for modules
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
@@ -206,3 +206,4 @@ if (typeof module !== 'undefined' && module.exports) {
     drawBoxplot
   };
 }
+*/

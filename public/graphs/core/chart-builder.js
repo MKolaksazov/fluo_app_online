@@ -225,8 +225,9 @@ class ChartBuilder {
     return chart;
   }
 }
-
+/*
 // Export
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = ChartBuilder;
 }
+*/
