@@ -104,8 +104,8 @@ class DataProcessor {
     const npqOffset2 = protocol === "NPQ2" ? 4 : 0;
 
     return [].concat(
-      this.tableData[index].slice(indexL1, indexL1 + 5 + npqOffset),
-      this.tableData[index].slice(indexD1, indexD1 + 3 + npqOffset2)
+      tableData[index].slice(indexL1, indexL1 + 4 + npqOffset),
+      tableData[index].slice(indexD1, indexD1 + 3 + npqOffset2)
     );
   }
 
@@ -196,8 +196,8 @@ class DataProcessor {
     const npqOffset2 = protocol === "NPQ2" ? 4 : 0;
 
     return [].concat(
-      this.indexCol.slice(indexL1, indexL1 + 5 + npqOffset),
-      this.indexCol.slice(indexD1, indexD1 + 3 + npqOffset2)
+      indexCol.slice(indexL1, indexL1 + 4 + npqOffset),
+      indexCol.slice(indexD1, indexD1 + 3 + npqOffset2)
     );
   }
 }

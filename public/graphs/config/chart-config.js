@@ -5,6 +5,19 @@
  * ==========================================
  */
 
+const NPQ =  {
+      xAxis: {
+        title: 'time [min]',
+        type: 'linear',
+        min: 207601,
+        timeConversionFactor: 60000000
+      },
+      yAxis: {
+        title: "[a.u.]",
+        min: 0
+      }
+    };
+
 const ChartConfig = {
   // Visual defaults
   defaults: {
@@ -50,18 +63,9 @@ const ChartConfig = {
         min: 0
       }
     },
-    NPQ: {
-      xAxis: {
-        title: 'time [min]',
-        type: 'linear',
-        min: 207601,
-        timeConversionFactor: 60000000
-      },
-      yAxis: {
-        title: "[a.u.]",
-        min: 0
-      }
-    }
+    NPQ1: NPQ,
+    NPQ2: NPQ,
+    NPQ3: NPQ,
   },
 
   // Parameter types
