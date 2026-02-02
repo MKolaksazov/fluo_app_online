@@ -10,7 +10,8 @@ const NPQ =  {
         title: 'time [min]',
         type: 'linear',
         min: 207601,
-        timeConversionFactor: 60000000
+        timeConversionFactor: 60000000,
+        stepSize: 120008200/4
       },
       yAxis: {
         title: "[a.u.]",

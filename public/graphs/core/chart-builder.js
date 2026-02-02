@@ -54,12 +54,13 @@ class ChartBuilder {
         max: xAxis.max,
         maxTicksLimit: xAxis.maxTicksLimit,
         callback: (value) => xAxis.tickLabels[value] || null
-      };
-    } else if (protocol === 'NPQ') {
-      scales.x.min = xAxis.min;
-      scales.x.ticks = {
-        callback: (value) => Math.round((value - 1) / xAxis.timeConversionFactor)
-      };
+      }
+    } else if (protocol.match(/NPQ[1-3]/) !== null) {
+      scales.x.min = xAxis.min,
+      scales.x.ticks = {            
+        stepSize: xAxis.stepSize,
+        callback: (value) => (Math.round((value - 1) / xAxis.timeConversionFactor*10) / 10)
+      }
     }
 
     return scales;
