@@ -70,7 +70,7 @@ async function loadFile(id_db){
     const res = await fetch('/api/data/'+id_db+'/csv');
     const data = await res.text();
     const table = document.getElementById('tbl');
-    processCSV(data.replace(/"/g, ''), 'tab');
+    processCSV(data.replace(/"/g, ''));
 }
 
 function removeRow(idRow) {
@@ -127,14 +127,22 @@ async function deleteFile(id_db) {
 //     deleteRecord(recordIdToDelete);
 // });
 
-function processCSV(contents, delimiter){
+function processCSV(contents){
+          const delimiters = ['\t', ',', ';'];
           var lines = contents.split("\n");
           var array = [];
-          for (var i=0; i<lines.length; i++){
-              if (delimiter == 'tab') { array[i] = lines[i].split("\t"); }
-              else if (delimiter == ',') { array[i] = lines[i].split(","); }
-              else { alert('Wrong delimiter!'); }
+          
+          for (var j=0; j<delimiters.length; j++){
+            try {
+              for (var i=0; i<lines.length; i++){
+                array[i] = lines[i].split(delimiters[j]);
+              }
+              if (array[5][0] == 'index') { break; }
+              else { console.log('Wrong delimiter!'); }
+            }
+            catch (err) { console.log(err, ' Wrong type of file or delimiter!'); return; }
           }
+
           indexCol = array.map(x => x[0]);
           indexCol = indexCol.slice(5, 983);
           const startOJIP = indexCol.indexOf("21");

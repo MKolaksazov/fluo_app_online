@@ -5,13 +5,19 @@ function transpose(arrayData) {
 /** Convert a 2D array into a CSV string
  */
 function arrayToCsv(data){
+  var delimiter = document.getElementById('delimiter').value;
+
+  if (delimiter == 'tab') { delimiter = '\t'; }
+  else if (delimiter == ',' || delimiter == ';') { }
+  else { alert('Wrong delimiter! ("tab", comma - ",", semocolon - ";")'); return 'error'; }
+
   return data.map(row =>
     row
     .map(String)  // convert every value to String
     .map(v => v.replaceAll('"', '""'))  // escape double quotes
     .map(v => `${v}`)  // quote it
-    .join('\t')  // tab (comma)-separated
-  ).join('\t\n');  // rows starting on new lines
+    .join(delimiter)  // tab (comma)-separated
+  ).join(delimiter+'\n');  // rows starting on new lines
 }
 
 /** Download contents as a file
@@ -45,6 +51,8 @@ async function downloadBlob(content=tableData, filename=`export.csv`, contentTyp
 
   var csv = arrayToCsv(content);
 
+  if (csv == 'error') { return; }
+
   // var pass = document.getElementById('pwd').value;
   // if (pass != secretKey) { alert("CSV files can't be downloaded without the password!"); return; }
   // Create a blob
@@ -66,26 +74,4 @@ function insertSelected(indices) {
   }); //console.log(dataSets);
   return dataSets;
 }
-
-
-/*
-*
-*
-
-  var encrypted = CryptoJS.AES.encrypt(csv, secretKey);
-  csv = "encrypted: " + encrypted; 
-
-  ** Code, used for decrypting of the CSV file:
-
-  var csv = arrayToCsv(content);
-  var encrypted = CryptoJS.AES.encrypt(csv, key);
-  //equivalent to CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(message), key);
-  var decrypted = CryptoJS.AES.decrypt(encrypted, key);
-  csv = "enc: " + encrypted; // + "dec: " + decrypted.toString(CryptoJS.enc.Utf8);
-
-*
-*
-*/
-
-
 

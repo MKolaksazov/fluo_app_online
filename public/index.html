@@ -42,12 +42,6 @@
 
       <!-- Controls Section -->
       <div class="contaner">
-        <!-- Delimiter Input -->
-        <div class="input-group-mb-3">
-          <span class="input-group-text text-left">delimiter:</span>
-          <input class="input-text" type="text" id="delimiter" name="delimiter" value="tab" required style="width: 50%;">
-        </div>
-
         <!-- File + Draw Transient Group -->
         <div class="btn-group">
           <button type="button" class="btn input-group-text aqua btn-left" data-bs-toggle="dropdown">
@@ -85,6 +79,12 @@
             </li>
             <li>
               save selected as: <input class="input-text" type="text" id="export" name="label" value="export" required>.csv
+        <!-- Delimiter Input -->
+        <div class="input-group-mb-3">
+          <span class="input-group-text text-left">delimiter:</span>
+          <input class="input-text" type="text" id="delimiter" name="delimiter" value="tab" required style="width: 50%;">
+        </div>
+
             </li>
             <li>
               <label id="fileinput_s" class="btn input-group-text aqua" onclick="downloadBlob();">save to disk

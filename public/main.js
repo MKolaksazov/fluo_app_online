@@ -77,15 +77,6 @@ document.getElementById('parameters').onchange = function() {
 };
 
   function readSingleFile(evt) {
-    if (delimiter == 'knob') { // change CSS style of the buttons
-    var knob = document.getElementsByClassName("aqua");
-
-        for(var i = (knob.length - 1); i >= 0; i--) {
-          if (knob[i].className == "button aqua") { knob[i].className = "input-group-text aqua"; }
-          else { knob[i].className = "button aqua"; }
-        }
-    }
-
     var f = evt.target.files[0];
         if (f) {
           var r = new FileReader();
@@ -94,8 +85,7 @@ document.getElementById('parameters').onchange = function() {
               var contents = e.target.result;
               info.innerHTML = ("File <b>" + f.name + "</b> uploaded! " + " <b>" + f.type + "</b> " + " " + f.size/1000 + " kB");
 
-              var delimiter = document.getElementById('delimiter').value;
-              processCSV(contents, delimiter);
+              processCSV(contents);
          }
           r.readAsText(f);
         } else {
