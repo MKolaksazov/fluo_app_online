@@ -69,6 +69,7 @@ class CanvasManager {
       container.removeChild(container.firstChild);
     }
     this.currentChart = null;
+    localStorage.removeItem('draw');
   }
 
   /**

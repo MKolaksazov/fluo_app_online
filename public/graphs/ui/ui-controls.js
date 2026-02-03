@@ -8,7 +8,7 @@
 class UIControls {
   constructor(canvasManager) {
     this.canvasManager = canvasManager;
-    this.gridEnabled = false;
+    this.gridEnabled = true;
   }
 
   /**
@@ -31,7 +31,7 @@ class UIControls {
       right: '0',
       margin: '8px 0px',
       background: 'transparent',
-      color: '#808080'
+      color: '#888'
     });
 
     button.addEventListener("click", onClose || (() => this.canvasManager.clearContainer()));
@@ -47,7 +47,7 @@ class UIControls {
     
     button.id = "grid-button";
     button.innerHTML = 'grid on/off';
-    button.classList.add('btn-right', 'aqua');
+    button.classList.add('aqua', 'btn-right');
     
     this.applyButtonStyles(button, {
       position: 'relative',

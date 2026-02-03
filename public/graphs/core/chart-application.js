@@ -48,6 +48,8 @@ class ChartApplication {
     this.uiControls.setupStandardControls(() => {
       this.drawTimeSeriesGraph(colsSelected, protocol);
     });
+    
+    localStorage.setItem('draw', 'drawGraph');
 
     // Create chart
     this.chartBuilder.createTimeSeriesChart(
@@ -67,6 +69,8 @@ class ChartApplication {
     this.uiControls.setupStandardControls(() => {
       this.drawParameterChart(colsSelected, parameter, protocol);
     });
+
+    localStorage.setItem('draw', 'drawParameters');
 
     // Create chart
     this.chartBuilder.createParameterChart(
@@ -109,6 +113,8 @@ class ChartApplication {
       this.uiControls.setupStandardControls(() => {
         this.drawBoxplot(colsSelected, parameter, protocol);
       });
+
+      localStorage.setItem('draw', 'drawBoxplot');
 
       // Create chart
       this.chartBuilder.createBoxplotChart(boxplotData, data, letterAssignments, tooltips);

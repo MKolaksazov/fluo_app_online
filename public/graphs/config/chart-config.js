@@ -22,10 +22,10 @@ const ChartConfig = {
   // Visual defaults
   defaults: {
     fontFamily: "Lato, sans-serif",
-    color: '#888', // currentThemeIndex == 1 ? 'black' : 'white',
+    color: currentThemeIndex == 1 ? 'black' : 'white',
     fontSize: 16,
     borderColor: '#888', // currentThemeIndex == 1 ? 'black' : 'white',
-    gridColor: '#888', // currentThemeIndex == 1 ? 'black' : 'white',
+    gridColor: currentThemeIndex == 1 ? 'black' : 'white',
     gridLineWidth: 1
   },
 
