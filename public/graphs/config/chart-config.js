@@ -10,8 +10,7 @@ const NPQ =  {
         title: 'time [min]',
         type: 'linear',
         min: 207601,
-        timeConversionFactor: 60000000,
-        stepSize: 120008200/4
+        timeConversionFactor:  120008200*5,
       },
       yAxis: {
         title: "[a.u.]",
@@ -23,10 +22,10 @@ const ChartConfig = {
   // Visual defaults
   defaults: {
     fontFamily: "Lato, sans-serif",
-    color: '#808080',
+    color: '#888', // currentThemeIndex == 1 ? 'black' : 'white',
     fontSize: 16,
-    borderColor: '#808080',
-    gridColor: '#808080',
+    borderColor: '#888', // currentThemeIndex == 1 ? 'black' : 'white',
+    gridColor: '#888', // currentThemeIndex == 1 ? 'black' : 'white',
     gridLineWidth: 1
   },
 
@@ -64,9 +63,9 @@ const ChartConfig = {
         min: 0
       }
     },
-    NPQ1: NPQ,
-    NPQ2: NPQ,
-    NPQ3: NPQ,
+    NPQ1: { ...NPQ, xAxis: { ...NPQ.xAxis, stepSize: 120008200/4 } },
+    NPQ2: { ...NPQ, xAxis: { ...NPQ.xAxis, stepSize: 120008200/2 } },
+    NPQ3: { ...NPQ, xAxis: { ...NPQ.xAxis, stepSize: 120008200/2 } },
   },
 
   // Parameter types

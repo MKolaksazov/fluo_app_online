@@ -31,7 +31,8 @@ function toggleTheme() {
 
   // Опционално: запазване на избраната тема в localStorage
   localStorage.setItem('selectedTheme', currentThemeIndex);
-
+  Chart.defaults.color = currentThemeIndex == 1 ? 'black' : 'white';
+  Chart.defaults.backgroundColor = currentThemeIndex == 1 ? 'black' : 'white';
   console.log('Theme changed to:', themes[currentThemeIndex]);
 }
 
