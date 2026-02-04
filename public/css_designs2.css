@@ -1,8 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200;400;600;800&display=swap');
 
-
-
 /* bootstrap 5 */
 
 .contaner { padding: 0px 0px 0px 0px; display: flex;
@@ -16,13 +14,11 @@
 .aqua:hover{ background-image: linear-gradient(#4dc47f,#b5ffd4); }
 
 
-
-.input-group-text, .aqua { width: auto; border-radius: 5px 1px 1px 5px; background-color: lightgreen; margin-left: 0px; margin-right: 0px;/*background-image: linear-gradient(#4dc47f,#b5ffd4);*/}
+.input-group-text, .aqua { width: auto; border: 1px solid lightgrey; border-radius: 5px 1px 1px 5px; background-color: lightgreen; margin-left: 0px; margin-right: 0px;/*background-image: linear-gradient(#4dc47f,#b5ffd4);*/}
 
 .center-btn {margin-left: -1px; border-radius: 1px 1px 1px 1px; background-color: lightgreen; box-shadow: 0px 3px 4px -2px #333; margin-right: 0px;}
 
 .form-control { border-radius: 1px 5px 5px 1px; height: auto; margin-left: 0px; background-color: lightgreen;  }/**/
-
 
 
 .form-control-hidden { width: 101%; height: 101%; }
@@ -85,7 +81,7 @@ input[type="file"] {
 
   -moz-border-radius: 24px;
 
-  border: 2px solid #ccc;
+  border: 2px solid #888;
 
   position: relative;
 
@@ -122,6 +118,8 @@ input[type="file"] {
   background-color: rgba(60, 199, 152, 0.8);
 
   background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(28, 156, 92, 0.8)), to(rgba(107, 255, 181, .9)));
+
+  border: 1px;
 
   border-top-color: #8cc2b0;
 

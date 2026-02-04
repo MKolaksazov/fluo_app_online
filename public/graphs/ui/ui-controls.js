@@ -10,7 +10,6 @@ class UIControls {
     this.canvasManager = canvasManager;
     this.gridEnabled = true;
   }
-
   /**
    * Creates close button with SVG icon
    */
@@ -29,9 +28,9 @@ class UIControls {
       position: 'absolute',
       top: '0',
       right: '0',
-      margin: '8px 0px',
+      margin: '8px -5px',
       background: 'transparent',
-      color: '#888'
+      color: localStorage.selectedTheme == '0' ? 'white' : 'black',
     });
 
     button.addEventListener("click", onClose || (() => this.canvasManager.clearContainer()));
@@ -47,14 +46,16 @@ class UIControls {
     
     button.id = "grid-button";
     button.innerHTML = 'grid on/off';
-    button.classList.add('aqua', 'btn-right');
+    button.classList.add('round-btn');
     
     this.applyButtonStyles(button, {
       position: 'relative',
       display: 'float',
       background: 'transparent',
-      color: 'white'
-    });
+      height: '28px',
+      color: localStorage.selectedTheme == "0" ? 'white' : 'black',
+      border: '1px solid #888',
+    }); 
 
     button.addEventListener("click", () => {
       this.gridEnabled = !this.gridEnabled;
@@ -75,13 +76,12 @@ class UIControls {
     slider.min = '8';
     slider.max = '32';
     slider.value = currentSize;
-    slider.classList.add('aqua', 'btn-right');
+    slider.classList.add('round-btn');
     
     this.applyButtonStyles(slider, {
       position: 'relative',
       display: 'float',
       background: 'transparent',
-      color: 'white'
     });
 
     slider.addEventListener("input", () => {
@@ -91,13 +91,47 @@ class UIControls {
     return slider;
   }
 
+  // Download graph 
+  createDownloadButton() {
+    const button = document.createElement("button");
+    
+    button.id = "save-button";
+    button.innerHTML = 'save chart as';
+    button.classList.add('round-btn');
+    
+    this.applyButtonStyles(button, {
+      position: 'relative',
+      display: 'float',
+      background: 'transparent',
+      height: '28px',
+      color: localStorage.selectedTheme == "0" ? 'white' : 'black',
+      border: '1px solid #888',
+    }); 
+
+    button.addEventListener("click", () => {
+      const myChart = chartApp.canvasManager.currentChart;
+      myChart.ctx.save();
+      myChart.ctx.globalCompositeOperation = 'destination-over';
+      myChart.ctx.fillStyle = localStorage.selectedTheme == '1' ? 'white' : 'black';
+      myChart.ctx.fillRect(0, 0, myChart.width, myChart.height);
+      myChart.ctx.restore();
+
+      const link = document.createElement('a');
+      link.href = myChart.toBase64Image('image/jpeg', 0.95);  // 0.95 - качество;  или просто myChart.toBase64Image()
+      link.download = prompt('Choose the name of the file:');                    // име на файла
+      link.click();
+    });
+    
+    return button;
+  }
+
   /**
    * Applies common button styles
    */
   applyButtonStyles(element, additionalStyles = {}) {
     const baseStyles = {
       border: 'none',
-      padding: '0px',
+      padding: '0px 5px 0px 5px',
       cursor: 'pointer',
       margin: '0px 50px 0px 50px',
     };
@@ -123,6 +157,7 @@ class UIControls {
     this.removeControl('grid-button');
     this.removeControl('font-label');
     this.removeControl('font-button');
+    this.removeControl('save-button');
     this.removeControl('close-button');
   }
 
@@ -169,6 +204,13 @@ class UIControls {
       redrawCallback();
     }, Chart?.defaults?.font?.size || 16);
     this.attachToContainer(fontSlider);
+
+    // Download button
+    const saveBtn = this.createDownloadButton(() => {
+      this.removeAllControls();
+      redrawCallback();
+    });
+    this.attachToContainer(saveBtn);
   }
 
   /**

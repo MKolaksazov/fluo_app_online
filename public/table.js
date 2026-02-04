@@ -177,3 +177,16 @@ function makeAverage(protocol) {
     updateColumnHighlight(table);
     // toggleAll(); // автоматично select/deselect на новата колона
 }
+
+// sort alphabetically
+
+function sortAlphabetically() {
+  var coll = new Intl.Collator('en', { numeric: false, sensitivity: 'base' });
+  var t1 = tableData.shift();
+  tableData.sort((a, b) => {
+    return coll.compare(a[0], b[0]);
+  });
+
+  tableData.unshift(t1);
+  makeTable(transpose(tableData));
+}

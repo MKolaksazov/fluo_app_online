@@ -34,6 +34,7 @@ function toggleTheme() {
   Chart.defaults.color = currentThemeIndex == 1 ? 'black' : 'white';
   ChartConfig.defaults.gridColor = currentThemeIndex == 1 ? 'black' : 'white';
   Chart.defaults.borderColor = currentThemeIndex == 1 ? 'black' : 'white';
+
   var draw = localStorage.draw;
   if (draw) { window[draw](getProtocol()); }
   console.log('Theme changed to:', themes[currentThemeIndex]);
