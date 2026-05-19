@@ -15,7 +15,7 @@ class ChartBuilder {
   /**
    * Builds scales configuration based on protocol
    */
-  buildScales(protocol, gridConfig) {
+  buildScales(protocol, gridConfig, correlation=false) {
     const protocolConfig = ChartConfig.protocols[protocol];
     
     if (!protocolConfig) {
@@ -25,7 +25,7 @@ class ChartBuilder {
     const xAxis = protocolConfig.xAxis;
     const yAxis = protocolConfig.yAxis;
 
-    const scales = {
+    var scales = {
       x: {
         title: {
           display: true,
@@ -46,6 +46,43 @@ class ChartBuilder {
         grid: gridConfig
       }
     };
+
+  if (correlation) {
+    scales = {
+      x: {
+        type: 'linear',
+        min: -0.5,
+        max: N - 0.5,
+//        title: {
+//          display: true,
+//          text: labels
+//        },
+        ticks: {
+          display: false
+          //stepSize: 1,
+          //color: '#aaa',
+          //font: { family: 'JetBrains Mono', size: 11 },
+          //callback: v => labels[v],
+        },
+//        grid: { color: '#1a1a1a' },
+        border: { color: '#222' }
+      },
+      y: {
+        type: 'linear',
+        min: -0.5,
+        max: N - 0.5,
+        reverse: true,
+        ticks: {
+          display: false
+          //stepSize: 1,
+          //color: '#777',
+          //font: { family: 'JetBrains Mono', size: 11 },
+          //callback: v => Number.isInteger(v) ? (labels[v] ?? '') : '',
+        },
+        grid: { display: false, color: '#1a1a1a' },
+        border: { color: '#222' }
+      }
+    };}
 
     // Add protocol-specific x-axis configuration
     if (protocol === 'OJIP') {
@@ -71,6 +108,8 @@ class ChartBuilder {
    */
   buildChartOptions(scales, displayLegend = true) {
     return {
+      maintainAspectRatio: true,
+      layout: { padding: { left: 80, bottom: 50, top: 10, right: 10 } },
       legend: {
         display: displayLegend,
         position: 'right',
@@ -79,7 +118,11 @@ class ChartBuilder {
           fontColor: 'black'
         }
       },
-      scales: scales
+      scales: scales,
+      
+      plugins: {
+        legend: { display: false }, tooltip: { enabled: false } 
+      }
     };
   }
 
@@ -102,6 +145,44 @@ class ChartBuilder {
     const chart = new Chart(canvas, {
       type: ChartConfig.chartTypes.line,
       data: { datasets },
+      options
+    });
+
+    this.canvasManager.setChart(chart);
+    return chart;
+  }
+
+  /**
+   * Creates a correlation chart
+   */
+  createCorrelationChart(indices, protocol) {
+    // Determine chart type based on parameter and protocol
+    if (protocol !== 'OJIP') {
+      alert('This works only for the OJIP protocol!'); return;
+    }
+/*
+    const datasets = this.dataProcessor.processTimeSeriesData(
+      indices, 
+      slicePoints, 
+      ChartConfig.colors
+    );
+*/
+    const gridConfig = this.uiControls.getGridConfig();
+    const scales = this.buildScales(protocol, gridConfig, true);
+    const options = this.buildChartOptions(scales, false);
+
+    const canvas = this.canvasManager.resetCanvas();
+    
+    const chart = new Chart(canvas, {
+      type: ChartConfig.chartTypes.scatter,
+      plugins: [heatmapPlugin],
+      data: {
+        datasets: [{
+           data: Array.from({ length: N }, (_, i) => ({ x: i, y: i })),
+           pointRadius: 0,
+           hoverRadius: 0,
+         }]
+      },
       options
     });
 

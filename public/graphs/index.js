@@ -43,6 +43,7 @@ const LOAD_ORDER = [
   'ui/ui-controls.js',
   'core/data-processor.js',
   'modules/statistical-analyzer.js',
+  'modules/heatmap-plugin.js',
   'core/chart-builder.js',
   'core/chart-application.js'
 ];

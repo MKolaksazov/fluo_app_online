@@ -17,6 +17,7 @@ function getProtocol() {
   document.getElementById('makeAvg').setAttribute('onclick', `makeAverage('${protocol}')`);
   document.getElementById('makeGr').setAttribute('onclick', `drawGraph('${protocol}')`);
   document.getElementById('drawParams').setAttribute('onclick', `drawParameters('${protocol}')`);
+  document.getElementById('draw-correlation').setAttribute('onclick', `drawCorrelation('${protocol}');`);
   return protocol;
 }
 

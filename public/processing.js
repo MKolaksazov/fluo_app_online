@@ -171,7 +171,8 @@ function processCSV(contents){
             }
           }
 
-          makeTable(transpose(tableData));
+          makeTable(tableData);
+          //makeTable(transpose(tableData));
 }
 
 // ===========================================

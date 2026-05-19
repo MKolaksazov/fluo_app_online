@@ -15,7 +15,7 @@ class DataProcessor {
    * Gets sample label from table cell
    */
   getSampleLabel(columnIndex) {
-    const cell = tbl.children[0].rows[0].childNodes[columnIndex];
+    const cell = tbl.children[0].rows[columnIndex].childNodes[0];
     const labelElement = cell.getElementsByClassName("sampleLabel")[0];
     return labelElement ? labelElement.value : `Sample ${columnIndex}`;
   }
@@ -116,8 +116,8 @@ class DataProcessor {
     const fiIndex = this.getParameterIndex('Fi');
     const fmIndex = this.getParameterIndex('Fm');
     
-    const fm = parseFloat(tbl.children[0].rows[fmIndex].childNodes[index].innerText);
-    const fi = parseFloat(tbl.children[0].rows[fiIndex].childNodes[index].innerText);
+    const fm = parseFloat(tbl.children[0].rows[index].childNodes[fmIndex].innerText);
+    const fi = parseFloat(tbl.children[0].rows[index].childNodes[fiIndex].innerText);
     
     return (fm - fi) / fm;
   }
@@ -127,7 +127,7 @@ class DataProcessor {
    */
   getParameterValue(index, parameter) {
     const paramIndex = this.getParameterIndex(parameter);
-    return tbl.children[0].rows[paramIndex].childNodes[index].innerText;
+    return tbl.children[0].rows[index].childNodes[paramIndex].innerText;
   }
 
   /**

@@ -81,6 +81,26 @@ class ChartApplication {
   }
 
   /**
+   * Draws correlation chart
+   */
+  drawCorrelationChart(colsSelected, protocol) {
+    if (!this.validateSelection(colsSelected)) return;
+
+    // Setup UI controls with redraw callback
+    this.uiControls.setupStandardControls(() => {
+      this.drawCorrelationChart(colsSelected, protocol);
+    });
+
+    localStorage.setItem('draw', 'drawCorrelation');
+
+    // Create chart
+    this.chartBuilder.createCorrelationChart(
+      Array.from(colsSelected),
+      protocol
+    );
+  }
+
+  /**
    * Draws boxplot with statistical analysis
    */
   drawBoxplot(colsSelected, parameter) {
@@ -183,6 +203,18 @@ function drawParameters(protocol) {
   if (parameter) {
     chartApp.drawParameterChart(colsSelected, parameter, protocol);
   }
+}
+
+/**
+ * Draw correlation matrix (backwards compatible)
+ */
+function drawCorrelation(protocol) {
+  if (!chartApp) {
+    console.error('Chart application not initialized');
+    return;
+  }
+  
+  chartApp.drawCorrelationChart(colsSelected, protocol);
 }
 
 /**

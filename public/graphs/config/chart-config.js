@@ -81,7 +81,8 @@ const ChartConfig = {
   chartTypes: {
     line: 'line',
     bar: 'bar',
-    boxplot: 'boxplot'
+    boxplot: 'boxplot',
+    scatter: 'scatter'
   },
 
   // Statistical settings
