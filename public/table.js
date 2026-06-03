@@ -122,7 +122,7 @@ function updateRowHighlight(table) {
 function toggleAll() {
     const table = document.getElementById('table-1');
     const totalRows = table.rows.length;
-    if (((colsSelected.size > totalCols/2 - 1) && (colsSelected.size < totalCols - 1)) || (colsSelected.size == 0)) { 
+    if (((colsSelected.size > totalRows/2 - 1) && (colsSelected.size < totalRows - 1)) || (colsSelected.size == 0)) { 
         for (let i = 1; i < totalRows; i++) colsSelected.add(i); // skip header row 0
     } else {
         colsSelected.clear();
