@@ -147,14 +147,14 @@ function processCSV(contents){
           indexCol = indexCol.slice(5, 983);
           const startOJIP = indexCol.indexOf("21");
           const startNPQ1 = indexCol.indexOf("2443101");
-          const startNPQ2 = indexCol.indexOf("207601");
+          const startNPQ2 = indexCol.indexOf("3443101");
 
           var protocol = getProtocol();
 
           if (protocol == 'OJIP') { slicePoints = [startOJIP, startOJIP+457]; }
           else if (protocol == 'NPQ1') { slicePoints = [startNPQ1, 159+startNPQ1]; }
           else if (protocol == 'NPQ2') { slicePoints = [startNPQ2, 249+startNPQ2]; }
-          else if (protocol == 'NPQ3') { slicePoints = [startNPQ2, "282312701"]; }   // startNPQ2+164]; }
+          else if (protocol == 'NPQ3') { slicePoints = [startNPQ2, startNPQ2+164]; }
           else { alert('Protocol error!'); }
 
           tableData = [];

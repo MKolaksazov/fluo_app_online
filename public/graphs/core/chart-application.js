@@ -57,6 +57,7 @@ class ChartApplication {
       slicePoints,
       protocol
     );
+
   }
 
   /**
