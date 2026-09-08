@@ -121,7 +121,7 @@ class ChartBuilder {
       scales: scales,
       
       plugins: {
-        legend: { display: false }, tooltip: { enabled: false } 
+        legend: { display: true }, tooltip: { enabled: false } 
       }
     };
   }
@@ -198,7 +198,7 @@ class ChartBuilder {
     
     let chartType = ChartConfig.chartTypes.bar;
     let chartLabels = result.labels;
-    let displayLegend = false;
+    let displayLegend = true;
 
     // Determine chart type based on parameter and protocol
     if (protocol !== 'OJIP' && ChartConfig.parameters.npqTypes.includes(parameter)) {
@@ -286,7 +286,7 @@ class ChartBuilder {
         responsive: true,
         plugins: {
           legend: {
-            display: false
+            display: true
           },
           tooltip: {
             callbacks: {

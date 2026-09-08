@@ -96,16 +96,25 @@ class DataProcessor {
   /**
    * Extracts NPQ parameter data (Light/Dark phases)
    */
+
   extractNPQData(index, parameter, protocol) {
     const indexL1 = this.getParameterIndex(parameter + '_L1');
     const indexD1 = this.getParameterIndex(parameter + '_D1');
-    
-    const npqOffset = protocol === "NPQ2" ? 5 : 0;
-    const npqOffset2 = protocol === "NPQ2" ? 4 : 0;
+    let indexL5 = 0;
+    let indexD4 = 0;
+    let npq2addition = 0;
+
+    if (protocol !== "NPQ1") {
+      indexL5 = this.getParameterIndex(parameter + '_L5'); 
+      indexD4 = this.getParameterIndex(parameter + '_D4');
+      npq2addition = 4;
+    }
 
     return [].concat(
-      tableData[index].slice(indexL1, indexL1 + 4 + npqOffset),
-      tableData[index].slice(indexD1, indexD1 + 3 + npqOffset2)
+      tableData[index].slice(indexL1, indexL1 + 4),
+      tableData[index].slice(indexL5, indexL5 + npq2addition),
+      tableData[index].slice(indexD1, indexD1 + 3),
+      tableData[index].slice(indexD4, indexD4 + npq2addition)
     );
   }
 
@@ -191,13 +200,21 @@ class DataProcessor {
   getNPQLabels(parameter, protocol) {
     const indexL1 = this.getParameterIndex(parameter + '_L1');
     const indexD1 = this.getParameterIndex(parameter + '_D1');
-    
-    const npqOffset = protocol === "NPQ2" ? 5 : 0;
-    const npqOffset2 = protocol === "NPQ2" ? 4 : 0;
+    let indexL5 = 0;
+    let indexD4 = 0;
+    let npq2addition = 0;
+
+    if (protocol !== "NPQ1") {
+      indexL5 = this.getParameterIndex(parameter + '_L5'); 
+      indexD4 = this.getParameterIndex(parameter + '_D4');
+      npq2addition = 4;
+    }
 
     return [].concat(
-      indexCol.slice(indexL1, indexL1 + 4 + npqOffset),
-      indexCol.slice(indexD1, indexD1 + 3 + npqOffset2)
+      indexCol.slice(indexL1, indexL1 + 4),
+      indexCol.slice(indexL5, indexL5 + npq2addition),
+      indexCol.slice(indexD1, indexD1 + 3),
+      indexCol.slice(indexD4, indexD4 + npq2addition)
     );
   }
 }

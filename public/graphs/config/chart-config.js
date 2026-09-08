@@ -64,7 +64,7 @@ const ChartConfig = {
       }
     },
     NPQ1: { ...NPQ, xAxis: { ...NPQ.xAxis, stepSize: 120008200/4 } },
-    NPQ2: { ...NPQ, xAxis: { ...NPQ.xAxis, stepSize: 120008200*2 } },
+    NPQ2: { ...NPQ, xAxis: { ...NPQ.xAxis, stepSize: 120008200 } },
     NPQ3: { ...NPQ, xAxis: { ...NPQ.xAxis, stepSize: 120008200 } },
   },
 
